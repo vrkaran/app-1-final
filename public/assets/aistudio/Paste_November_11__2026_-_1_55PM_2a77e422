@@ -1,0 +1,1375 @@
+# HBX SOLAR ONE — PHASE 3
+# ENTERPRISE FIREBASE CLOUD STORAGE & DOCUMENT MANAGEMENT SYSTEM
+
+## ROLE AND EXECUTION AUTHORITY
+
+Act as a Principal Android Architect, Senior Kotlin Engineer, Firebase Solutions Architect, Cloud Security Engineer, and Enterprise Document Management System Developer.
+
+You are working on an EXISTING application named **HBX SOLAR ONE**.
+
+Your responsibility is to implement Phase 3: a complete, secure, scalable, offline-first Firebase Cloud Storage and Enterprise Document Management System.
+
+This is an implementation task, not a design proposal.
+
+You must inspect the existing project, understand its architecture, implement the required functionality, integrate it into existing screens, execute tests, and update technical documentation.
+
+Do not simply generate documentation claiming that features have been implemented.
+
+Every claimed feature must have corresponding source code, configuration, security rules, and verification evidence.
+
+---
+
+# 1. EXISTING PROJECT CONTEXT
+
+The application has already completed:
+
+- Phase 1: Firebase Provisioning, Authentication and Role-Based Access Control.
+- Phase 2: Room Database, Firestore Integration and Offline-First Synchronization.
+
+### Mandatory existing technology stack
+
+| Layer | Technology |
+|---|---|
+| Mobile application | Native Android |
+| Programming language | Kotlin |
+| UI framework | Jetpack Compose |
+| Architecture | Clean Architecture + MVVM |
+| Local database | Room SQLite |
+| Cloud database | Firebase Cloud Firestore |
+| Cloud file storage | Firebase Cloud Storage |
+| Authentication | Firebase Authentication |
+| Asynchronous operations | Kotlin Coroutines and Flow |
+| Background operations | WorkManager |
+| Dependency injection | Preserve the existing DI implementation |
+| Image processing | Android-compatible image compression |
+| Document generation | Existing Android PDF generation implementation |
+
+Do not migrate the project to Flutter, React Native, React, or another framework.
+
+Do not introduce a second competing application architecture.
+
+### Existing Phase 1 implementation
+
+The application already has:
+
+1. Google Sign-In using Android Credential Manager.
+2. Phone OTP authentication interface and existing authentication integration.
+3. Firebase user profiles.
+4. Ten operational RBAC roles:
+
+- SUPER_ADMIN
+- ADMIN
+- OPERATIONS_MANAGER
+- SALES_MANAGER
+- TEAM_LEADER
+- BDE
+- INSTALLATION_ENGINEER
+- SERVICE_ENGINEER
+- PARTNER
+- CUSTOMER
+
+5. Firestore-based user identity and role information.
+6. Default-deny Firestore security rules.
+7. Existing Firebase authentication and authorization infrastructure.
+
+### Existing Phase 2 implementation
+
+The application already has:
+
+1. Room database: `hbx_solar_database`.
+2. Strongly typed Room entities.
+3. DAOs with Kotlin Flow.
+4. Persistent offline synchronization queue.
+5. WorkManager-based background synchronization.
+6. Connectivity monitoring.
+7. Firestore real-time listeners.
+8. Existing repository and MVVM architecture.
+
+Existing entities include:
+
+- LeadEntity
+- PaymentEntity
+- SiteSurveyEntity
+- SyncOperationEntity
+- PipelineStageEntity
+- BomItemEntity
+
+### Existing UI implementation
+
+The application contains 17 Google Stitch-designed screens.
+
+The existing HBX Solar design system must remain intact.
+
+Brand colors:
+
+- Deep Navy: #101C36
+- Gold Accent: #C6A15B
+- Dark Navy: #0B1428
+- Typography: Plus Jakarta Sans and Inter
+
+Maintain the existing component library, navigation, spacing, typography, icons, cards, dialogs, buttons, and screen layouts.
+
+---
+
+# 2. PRIMARY OBJECTIVE
+
+Build an enterprise-grade Cloud Storage and Document Management Module.
+
+The system must allow authorized employees, managers, administrators, engineers, partners, and customers to securely upload, view, download, organize, and manage business-related files.
+
+The system must support:
+
+1. Customer KYC documents.
+2. Customer electricity bills.
+3. Customer identity and address documents.
+4. Site survey photographs.
+5. Site survey videos, where supported.
+6. Rooftop photographs.
+7. Solar panel installation photographs.
+8. Inverter and battery installation evidence.
+9. Installation completion photographs.
+10. Technical inspection reports.
+11. Quotation PDFs.
+12. Project documents.
+13. Payment receipts.
+14. Bank transfer proof.
+15. UPI transaction screenshots.
+16. NEFT/RTGS transaction proof.
+17. Cheque deposit evidence.
+18. Service and maintenance photographs.
+19. Warranty certificates.
+20. Customer agreements and consent documents.
+
+Every file must be linked to its relevant customer, lead, project, site survey, payment, or service request.
+
+The implementation must be secure, maintainable, offline-capable, and production-oriented.
+
+---
+
+# 3. ARCHITECTURAL REQUIREMENTS
+
+Extend the existing Clean Architecture implementation.
+
+Do not put Firebase Storage operations directly inside Composable functions or ViewModels.
+
+Implement dedicated layers.
+
+### Recommended architecture
+
+Presentation Layer:
+- Existing Jetpack Compose screens.
+- Document upload components.
+- Image preview components.
+- Document management screens.
+- Upload progress indicators.
+- Download and retry controls.
+
+Domain Layer:
+- Document models.
+- Storage repository interfaces.
+- Upload use cases.
+- Download use cases.
+- Delete use cases.
+- Document permission use cases.
+- Document validation use cases.
+
+Data Layer:
+- FirebaseStorageDataSource.
+- FirebaseDocumentRepository.
+- DocumentDao.
+- DocumentEntity.
+- DocumentUploadWorker.
+- DocumentDownloadWorker.
+- StorageOperationQueue.
+- Firestore metadata data source.
+
+All Firebase Storage operations must be accessed through repository interfaces.
+
+Use dependency injection consistently with the existing project.
+
+Do not create duplicate repositories or duplicate database instances.
+
+---
+
+# 4. FIREBASE CLOUD STORAGE CONFIGURATION
+
+Integrate Firebase Cloud Storage with the existing Firebase project.
+
+Existing project ID:
+
+`gen-lang-client-0270919196`
+
+Before implementation:
+
+1. Inspect the existing Firebase configuration.
+2. Inspect the existing Gradle configuration.
+3. Inspect the existing Firebase dependencies.
+4. Verify that the correct Firebase Storage SDK is configured.
+5. Check whether Cloud Storage has already been provisioned.
+6. Identify the actual configured storage bucket.
+7. Do not assume a bucket name.
+8. Do not hardcode credentials, API secrets, or service account keys.
+9. Do not create duplicate Firebase projects.
+10. Preserve the existing Firebase Authentication and Firestore configuration.
+
+If Cloud Storage has not been provisioned, provide the exact Firebase Console configuration steps and identify the missing prerequisites.
+
+Do not claim successful cloud integration until the actual bucket is accessible and upload/download tests pass.
+
+Use Firebase Storage SDK APIs compatible with the project's current Firebase dependency configuration.
+
+---
+
+# 5. ENTERPRISE STORAGE DIRECTORY STRUCTURE
+
+Create a standardized, scalable storage hierarchy.
+
+Use the authenticated Firebase UID and immutable business identifiers.
+
+Recommended structure:
+
+`/users/{uid}/profile/`
+
+`/customers/{customerId}/kyc/`
+
+`/customers/{customerId}/electricity-bills/`
+
+`/customers/{customerId}/agreements/`
+
+`/leads/{leadId}/documents/`
+
+`/site-surveys/{surveyId}/photos/`
+
+`/site-surveys/{surveyId}/videos/`
+
+`/projects/{projectId}/site-photos/`
+
+`/projects/{projectId}/installation-evidence/`
+
+`/projects/{projectId}/inspection-reports/`
+
+`/projects/{projectId}/completion-certificates/`
+
+`/projects/{projectId}/warranty-documents/`
+
+`/quotations/{quotationId}/pdf/`
+
+`/payments/{paymentId}/receipts/`
+
+`/payments/{paymentId}/proof/`
+
+`/service-requests/{serviceRequestId}/attachments/`
+
+`/company-assets/`
+
+These are logical storage paths, not public web directories.
+
+All business files must have controlled access.
+
+### File naming convention
+
+Generate unique filenames.
+
+Recommended format:
+
+`{documentType}_{businessId}_{timestamp}_{uuid}.{extension}`
+
+Example:
+
+`site_photo_PROJECT102_1794418200_a8f92c.jpg`
+
+Requirements:
+
+- Prevent filename collisions.
+- Prevent path traversal.
+- Normalize filenames.
+- Validate extensions.
+- Preserve original filename as metadata.
+- Never use an untrusted user-provided filename directly as a storage path.
+
+---
+
+# 6. ENTERPRISE DOCUMENT DATA MODEL
+
+Create a strongly typed document model.
+
+Implement:
+
+### DocumentEntity (Room)
+
+Required fields:
+
+- documentId: String
+- businessId: String
+- parentEntityType: String
+- parentEntityId: String
+- documentCategory: String
+- documentType: String
+- originalFileName: String
+- storageFileName: String
+- storagePath: String
+- mimeType: String
+- fileExtension: String
+- fileSizeBytes: Long
+- uploadedByUid: String
+- uploadedByName: String
+- uploadedByRole: String
+- uploadedAt: Long
+- updatedAt: Long
+- uploadStatus: String
+- syncStatus: String
+- checksum: String?
+- thumbnailPath: String?
+- description: String?
+- isDeleted: Boolean
+- version: Int
+
+Add any additional fields required by the existing architecture.
+
+### Firestore metadata collection
+
+Use:
+
+`documents/{documentId}`
+
+Store metadata only.
+
+Do not store actual file bytes in Firestore.
+
+Recommended metadata:
+
+- documentId
+- businessId
+- parentEntityType
+- parentEntityId
+- documentCategory
+- documentType
+- originalFileName
+- storagePath
+- mimeType
+- fileSizeBytes
+- uploadedByUid
+- uploadedByRole
+- uploadedAt
+- updatedAt
+- checksum
+- version
+- isDeleted
+
+Do not expose unnecessary sensitive information through metadata.
+
+### Relationships
+
+Every document must be associated with its relevant business entity.
+
+Examples:
+
+A site survey photograph must reference its survey ID.
+
+A payment receipt must reference its payment ID.
+
+A quotation PDF must reference its quotation ID.
+
+An installation photograph must reference its project ID.
+
+Do not allow orphaned business documents.
+
+Create appropriate Room indexes and Firestore query patterns.
+
+Use database migrations rather than destructive database recreation.
+
+---
+
+# 7. FILE UPLOAD ENGINE
+
+Build a reusable upload engine.
+
+The upload engine must support:
+
+- Image uploads.
+- PDF uploads.
+- Supported office documents.
+- Supported video uploads.
+- Multiple file selection.
+- Single file upload.
+- Sequential batch uploads.
+- Upload progress tracking.
+- Upload cancellation.
+- Upload retry.
+- Upload failure reporting.
+- Upload completion confirmation.
+
+### Upload workflow
+
+Implement this exact logical workflow:
+
+1. User selects a file.
+2. Application obtains a safe content URI.
+3. Validate file type.
+4. Validate file size.
+5. Validate business ownership and permissions.
+6. Generate document ID.
+7. Generate a unique storage path.
+8. Calculate checksum where practical.
+9. Save a pending DocumentEntity in Room.
+10. Save a persistent upload operation in the existing synchronization infrastructure.
+11. Start upload immediately if connectivity is available.
+12. Otherwise preserve the upload operation locally.
+13. Upload file to Firebase Cloud Storage.
+14. Track upload progress.
+15. Verify upload completion.
+16. Write document metadata to Firestore.
+17. Update Room document status.
+18. Mark upload queue operation as completed.
+19. Notify the UI.
+20. Display the uploaded document in its associated business record.
+
+The application must not mark a document as successfully uploaded before cloud upload and metadata persistence have both succeeded.
+
+### Upload state machine
+
+Implement explicit states:
+
+- LOCAL_ONLY
+- QUEUED
+- UPLOADING
+- UPLOADED
+- METADATA_PENDING
+- COMPLETED
+- FAILED
+- RETRY_PENDING
+- CANCELLED
+- DELETION_PENDING
+
+Handle process termination and application restarts.
+
+Do not lose pending uploads when the application is closed.
+
+---
+
+# 8. OFFLINE-FIRST DOCUMENT UPLOAD
+
+This is a critical requirement.
+
+HBX Solar employees frequently work in areas with unstable internet connectivity.
+
+The application must support offline document capture.
+
+### Offline workflow
+
+When the device is offline:
+
+1. Allow the user to capture or select a photograph.
+2. Store the local file in app-private persistent storage.
+3. Save document metadata in Room.
+4. Save an upload operation in the persistent queue.
+5. Display the document as Pending Upload.
+6. Allow the user to continue other business operations.
+7. Automatically resume uploads when internet connectivity returns.
+
+Use the existing WorkManager implementation.
+
+Do not create a second unrelated background synchronization engine.
+
+### WorkManager requirements
+
+Implement:
+
+- NetworkType.CONNECTED constraints.
+- Persistent work requests.
+- Exponential backoff.
+- Retry policies.
+- Upload operation IDs.
+- Duplicate upload prevention.
+- Cancellation support.
+- Progress reporting.
+- Worker result handling.
+
+Ensure that queued operations survive:
+
+- Application termination.
+- Device restart.
+- Network disconnection.
+- Temporary Firebase errors.
+- Upload interruptions.
+
+### Storage retention
+
+Do not delete local files immediately after upload starts.
+
+Delete local temporary copies only after:
+
+1. Cloud upload succeeds.
+2. Firestore metadata write succeeds.
+3. Room synchronization completes.
+4. Local retention rules permit cleanup.
+
+Do not delete the user's original document if it is required for future offline access.
+
+---
+
+# 9. IMAGE PROCESSING AND PHOTO MANAGEMENT
+
+Implement an image processing pipeline for site survey and installation photographs.
+
+Requirements:
+
+- Read image dimensions.
+- Validate image formats.
+- Compress oversized photographs.
+- Preserve sufficient visual quality.
+- Correct image orientation.
+- Generate thumbnails.
+- Preserve original images when required.
+- Avoid loading full-resolution images into memory unnecessarily.
+
+### Recommended image variants
+
+- Original image.
+- Optimized upload image.
+- Thumbnail image.
+
+Use a configurable compression strategy.
+
+Do not compress PDFs or other documents as images.
+
+Do not modify the original document without user consent.
+
+### Site survey photo categories
+
+Provide standardized categories:
+
+1. Rooftop Overview
+2. Rooftop Structure
+3. Roof Measurement
+4. Shadow Analysis
+5. Electrical Meter
+6. Existing Electrical Connection
+7. Distribution Board
+8. Earthing Location
+9. Inverter Installation Area
+10. Battery Installation Area
+11. Solar Panel Installation
+12. Final Installation
+13. Other
+
+Allow users to add descriptions.
+
+If location information is available and the user has granted permission, optionally associate GPS coordinates with the photo metadata.
+
+Do not require location permission for ordinary document uploads.
+
+Do not collect precise location data unnecessarily.
+
+---
+
+# 10. SECURE FILE ACCESS AND FIREBASE STORAGE RULES
+
+Security is mandatory.
+
+Implement Firebase Cloud Storage Security Rules.
+
+Do not use public read/write permissions.
+
+Never use:
+
+`allow read, write: if true;`
+
+Never make all customer documents publicly accessible.
+
+### Authentication
+
+Every upload and download must require a valid authenticated Firebase user.
+
+### Authorization
+
+Access must be based on:
+
+- Authenticated UID.
+- Verified role.
+- Customer ownership.
+- Business entity association.
+- Assigned territory or project permissions, where applicable.
+- Existing RBAC rules.
+
+### Role-based access matrix
+
+Implement permissions according to the existing Phase 1 RBAC architecture.
+
+SUPER_ADMIN:
+- Full authorized company document management.
+- View, upload, approve, and delete according to audit policies.
+
+ADMIN:
+- Administrative document access within authorized scope.
+
+OPERATIONS_MANAGER:
+- Project and installation documentation.
+- Survey and operational evidence.
+
+SALES_MANAGER:
+- Sales-related customer documents.
+- Lead and quotation documents.
+
+TEAM_LEADER:
+- Documents for assigned team members and authorized records.
+
+BDE:
+- Documents belonging to assigned leads and customers within authorized scope.
+- Upload customer documents and site survey evidence.
+
+INSTALLATION_ENGINEER:
+- Assigned project documents.
+- Installation photographs and inspection reports.
+
+SERVICE_ENGINEER:
+- Assigned service request documents and maintenance evidence.
+
+PARTNER:
+- Only documents explicitly associated with authorized partner projects or customers.
+
+CUSTOMER:
+- Only their own authorized documents.
+- Upload permitted customer documents.
+- View their own quotations, receipts, agreements, and project documents.
+
+Important:
+
+The matrix above defines the intended business permissions. Translate it into enforceable server-side conditions using the existing verified authentication and authorization model.
+
+Do not trust a role supplied by the Android client.
+
+Do not allow users to update their own role or privilege fields.
+
+Do not permit a BDE to access another BDE's customer documents simply by changing a document ID.
+
+Do not assume that knowing a storage path grants permission.
+
+### Storage Rules requirements
+
+Validate:
+
+- Authenticated user.
+- Allowed storage path.
+- File size.
+- Allowed MIME type.
+- Parent entity ownership.
+- Role and assignment permissions.
+- Document category.
+- Immutable security metadata.
+
+Use Firestore metadata and trusted authorization information where appropriate.
+
+Do not rely on client-only validation.
+
+If Storage Rules cannot safely verify a particular business relationship using available rule-accessible data, design the data model and authorization process accordingly.
+
+Do not claim a security condition is enforced if the rule engine cannot actually enforce it.
+
+Provide a documented limitation and a secure implementation approach.
+
+### File access URLs
+
+Do not store permanent public download URLs as the primary document identifier.
+
+Store the authenticated Storage path.
+
+Generate access through the Firebase Storage SDK.
+
+Do not expose sensitive customer documents through unrestricted download URLs.
+
+Do not log authentication tokens or sensitive document URLs.
+
+---
+
+# 11. DOCUMENT VIEWER AND PREVIEW SYSTEM
+
+Implement a reusable document viewer.
+
+Supported preview types:
+
+- JPEG
+- PNG
+- WebP
+- PDF
+
+Provide suitable handling for additional file formats.
+
+### Viewer features
+
+- Full-screen preview.
+- Zoom and pan for images.
+- PDF page navigation.
+- Download progress.
+- Download cancellation.
+- Retry failed downloads.
+- File information.
+- Uploaded by.
+- Upload date.
+- Document category.
+- File size.
+- Associated customer or project.
+
+For unsupported formats, provide a secure download option.
+
+Use temporary local files where necessary.
+
+Do not use publicly accessible file URLs.
+
+Prevent accidental sharing of sensitive customer documents.
+
+---
+
+# 12. ENTERPRISE DOCUMENT MANAGEMENT UI
+
+Integrate document functionality into the existing 17-screen application.
+
+Do not redesign the application.
+
+Use existing Stitch visual specifications.
+
+### A. Customer Profile — Documents Section
+
+Add a document section showing:
+
+- Customer identity documents.
+- Electricity bills.
+- Agreements.
+- Site survey documents.
+- Quotations.
+- Payment receipts.
+- Installation documents.
+- Warranty documents.
+
+Provide:
+
+- Upload.
+- Preview.
+- Download.
+- Retry.
+- Delete, if authorized.
+
+### B. Site Survey Screen
+
+Integrate:
+
+- Capture photograph.
+- Select from gallery.
+- Add photo category.
+- Add description.
+- Upload progress.
+- Pending upload count.
+- Uploaded photo gallery.
+- Failed upload retry.
+
+### C. Project Pipeline Screen
+
+Add document access at relevant milestones.
+
+For example:
+
+- Site survey completed.
+- Technical feasibility approved.
+- Quotation generated.
+- Installation scheduled.
+- Installation in progress.
+- Inspection completed.
+- Project completed.
+
+Only show relevant documents to authorized users.
+
+### D. Quotation Module
+
+Generated quotation PDFs must be linked to the quotation record.
+
+Allow:
+
+- PDF preview.
+- Secure download.
+- Version tracking.
+- Customer association.
+- Upload status.
+
+Preserve the existing quotation generation and A4 preview implementation.
+
+### E. Finance and Payments Screen
+
+Integrate manual payment documentation.
+
+Supported payment methods:
+
+- Cash.
+- UPI.
+- Bank transfer.
+- NEFT.
+- RTGS.
+- Cheque.
+
+Allow authorized employees to attach:
+
+- Payment proof.
+- UPI screenshot.
+- Bank transaction receipt.
+- Cheque deposit slip.
+- Manually generated payment receipt PDF.
+
+Important:
+
+HBX SOLAR ONE currently uses manual payment collection and verification.
+
+DO NOT integrate Razorpay, payment gateways, payment SDKs, online checkout APIs, or automatic payment collection.
+
+Payment verification must remain under the existing authorized finance/admin workflow.
+
+### F. Service Management
+
+Allow service engineers to attach:
+
+- Before-service photographs.
+- After-service photographs.
+- Inspection reports.
+- Replacement component photographs.
+- Warranty documents.
+
+### G. Admin Document Management
+
+Create an admin-accessible document management area within the existing application.
+
+Features:
+
+- Search documents.
+- Filter by category.
+- Filter by customer.
+- Filter by project.
+- Filter by uploader.
+- Filter by upload date.
+- Filter by upload status.
+- View document metadata.
+- Review failed uploads.
+- Retry failed operations.
+- Manage authorized deletion requests.
+
+Do not create a completely separate admin application.
+
+---
+
+# 13. DOCUMENT VERSIONING AND DELETION
+
+Implement safe document lifecycle management.
+
+### Versioning
+
+When a document is replaced:
+
+- Preserve the document ID or create a new version according to the existing business model.
+- Record the uploader.
+- Record the timestamp.
+- Maintain version history.
+- Prevent silent overwriting of important financial or legal documents.
+
+### Deletion
+
+Use soft deletion for business records.
+
+Implement:
+
+- Deletion request.
+- Permission validation.
+- Deletion reason.
+- Audit metadata.
+- Confirmation dialog.
+- Storage deletion queue.
+- Retry handling.
+
+Do not permanently delete financial, legal, or customer documents without authorized policy approval.
+
+If a document is referenced by a payment, quotation, agreement, or completed project, enforce the appropriate retention policy.
+
+Ensure failed deletion operations remain visible and retryable.
+
+---
+
+# 14. AUDIT LOGGING
+
+Implement an auditable document activity system.
+
+Record:
+
+- DOCUMENT_UPLOADED
+- DOCUMENT_DOWNLOAD_REQUESTED
+- DOCUMENT_VIEWED
+- DOCUMENT_REPLACED
+- DOCUMENT_DELETION_REQUESTED
+- DOCUMENT_DELETED
+- DOCUMENT_UPLOAD_FAILED
+- DOCUMENT_UPLOAD_RETRIED
+- DOCUMENT_PERMISSION_DENIED
+
+Audit information should include:
+
+- Event ID.
+- Document ID.
+- Business entity ID.
+- Actor UID.
+- Actor role.
+- Event type.
+- Timestamp.
+- Relevant status.
+- Failure reason, where applicable.
+
+Do not store passwords, authentication tokens, or sensitive file contents in logs.
+
+Audit records must not be editable by ordinary users.
+
+Use an appropriate trusted architecture for security-sensitive audit events.
+
+---
+
+# 15. PERFORMANCE AND SCALABILITY
+
+The system must support a growing business document repository.
+
+Implement:
+
+- Paginated document queries.
+- Lazy image loading.
+- Thumbnail-first rendering.
+- Background downloads.
+- Memory-efficient PDF previews.
+- Upload concurrency limits.
+- Configurable maximum file sizes.
+- Storage usage tracking.
+- Efficient Room indexes.
+- Firestore query indexes where needed.
+- Duplicate upload prevention.
+
+Do not load all customer documents into memory simultaneously.
+
+Avoid unnecessary Firestore reads and Storage downloads.
+
+Create a reusable storage configuration class for:
+
+- Maximum image size.
+- Maximum PDF size.
+- Maximum video size.
+- Image compression quality.
+- Thumbnail dimensions.
+- Maximum concurrent uploads.
+- Retry count.
+- Local temporary file retention.
+
+Do not invent Firebase billing limits or claim unlimited storage.
+
+Document the expected storage cost considerations and recommend configurable limits.
+
+---
+
+# 16. ERROR HANDLING AND RECOVERY
+
+Handle the following cases:
+
+- No internet connection.
+- Weak network connection.
+- Firebase Storage unavailable.
+- Authentication expired.
+- Permission denied.
+- Invalid MIME type.
+- File too large.
+- File not found.
+- Insufficient device storage.
+- Upload interrupted.
+- Duplicate upload.
+- Firestore metadata write failure.
+- Storage upload success but metadata failure.
+- Local database failure.
+- Device restart during upload.
+- User logs out during an upload.
+- User loses authorization during an upload.
+
+Every failure must produce an appropriate recoverable state.
+
+Never display a false success message.
+
+Provide useful user-facing error messages.
+
+Do not expose internal exception details or security-sensitive information.
+
+### Critical consistency requirement
+
+Handle the following failure scenario correctly:
+
+Storage upload succeeds, but Firestore metadata creation fails.
+
+In that case:
+
+1. Keep the local document record.
+2. Mark metadata synchronization as pending.
+3. Preserve the uploaded Storage path.
+4. Retry metadata creation safely.
+5. Prevent duplicate cloud file uploads.
+6. Mark the document completed only when the required operations succeed.
+
+Also handle the opposite case: local metadata exists but cloud upload never completed.
+
+---
+
+# 17. TESTING AND QUALITY ASSURANCE
+
+Do not finish implementation without tests.
+
+### A. Unit tests
+
+Test:
+
+- File validation.
+- MIME type validation.
+- Storage path generation.
+- Filename sanitization.
+- Document metadata mapping.
+- Repository operations.
+- Upload state transitions.
+- Retry policies.
+- Checksum generation.
+- Version management.
+- Deletion policies.
+
+### B. Room database tests
+
+Test:
+
+- DocumentEntity insertion.
+- DocumentEntity updates.
+- Document queries.
+- Parent entity relationships.
+- Upload queue persistence.
+- Process-restart recovery.
+- Failed upload recovery.
+- Pending metadata recovery.
+- Document deletion states.
+
+### C. Firebase Storage emulator tests
+
+Test:
+
+- Authenticated upload.
+- Unauthorized upload rejection.
+- Unauthorized download rejection.
+- Allowed file types.
+- Disallowed file types.
+- Maximum file size.
+- Customer ownership.
+- BDE assignment permissions.
+- Engineer project permissions.
+- Partner restrictions.
+- Customer access isolation.
+- Unauthorized deletion.
+- Cross-customer document access prevention.
+
+### D. Integration tests
+
+Test complete workflows:
+
+1. BDE uploads a customer electricity bill.
+2. BDE uploads site survey photographs offline.
+3. Network reconnects and uploads resume.
+4. Customer views an authorized quotation PDF.
+5. Finance employee attaches a UPI payment screenshot.
+6. Admin reviews a payment receipt.
+7. Installation engineer uploads completion photographs.
+8. Service engineer uploads maintenance evidence.
+9. Unauthorized employee attempts to access another customer's document.
+10. User closes the app during upload and reopens it.
+
+### E. Build validation
+
+Run the project's actual Gradle build and test commands.
+
+Resolve compilation errors.
+
+Resolve dependency conflicts.
+
+Verify that existing screens continue working.
+
+Report actual test results, not expected results.
+
+---
+
+# 18. DOCUMENTATION DELIVERABLES
+
+Create or update these files in the project root:
+
+1. FIREBASE_STORAGE_ARCHITECTURE.md
+   - Storage architecture.
+   - Storage hierarchy.
+   - Upload/download workflow.
+   - Firebase integration.
+
+2. DOCUMENT_MANAGEMENT_SCHEMA.md
+   - Room entities.
+   - Firestore metadata.
+   - Relationships.
+   - Field definitions.
+
+3. FIREBASE_STORAGE_SECURITY_RULES.md
+   - Complete Storage Rules.
+   - RBAC implementation.
+   - Ownership validation.
+   - Security limitations.
+
+4. OFFLINE_DOCUMENT_UPLOAD.md
+   - Offline upload workflow.
+   - Persistent queue.
+   - WorkManager configuration.
+   - Retry and recovery.
+
+5. DOCUMENT_VIEWER_ARCHITECTURE.md
+   - Supported formats.
+   - Preview architecture.
+   - Secure downloads.
+
+6. DOCUMENT_RETENTION_AND_AUDIT.md
+   - Versioning.
+   - Soft deletion.
+   - Retention policy.
+   - Audit events.
+
+7. PHASE_3_TESTING_REPORT.md
+   - Unit test results.
+   - Room test results.
+   - Storage emulator test results.
+   - Integration test results.
+   - Build status.
+   - Known limitations.
+
+8. DEVELOPMENT_PROGRESS.md
+   - Update Phase 3 implementation status.
+   - Clearly identify completed, partial, and pending features.
+
+Documentation must describe the actual implementation.
+
+---
+
+# 19. STRICT SCOPE CONTROL
+
+This task is ONLY Phase 3.
+
+Implement Firebase Cloud Storage and Enterprise Document Management.
+
+Do not start Phase 4.
+
+Do not implement:
+
+- Firebase AI Logic.
+- Gemini API integration.
+- AI customer support.
+- AI-powered lead scoring.
+- AI solar recommendations.
+- AI image analysis.
+- AI quotation generation.
+- New payment gateways.
+- Razorpay integration.
+- New authentication systems.
+- A Flutter migration.
+- A replacement UI framework.
+
+Do not break existing functionality.
+
+Do not replace existing Room tables unnecessarily.
+
+Do not remove existing Firestore collections.
+
+Do not modify existing authentication or RBAC logic unless a specific integration change is essential and backward-compatible.
+
+Do not redesign existing Google Stitch screens.
+
+---
+
+# 20. IMPLEMENTATION EXECUTION PLAN
+
+Execute the work in the following order.
+
+**STEP 1 — Existing Project Audit**
+
+Inspect the actual source code.
+
+Identify:
+
+- Existing modules.
+- Firebase dependencies.
+- Room database.
+- Existing entities.
+- Repository architecture.
+- WorkManager configuration.
+- Authentication implementation.
+- Firestore security model.
+- Existing screen navigation.
+
+Identify exactly which files require modification.
+
+**STEP 2 — Firebase Storage Provisioning**
+
+Verify Firebase Cloud Storage configuration and bucket availability.
+
+Configure dependencies and environment.
+
+Create the required Storage Rules.
+
+**STEP 3 — Document Data Layer**
+
+Implement:
+
+- DocumentEntity.
+- DocumentDao.
+- Room migration.
+- Firestore metadata model.
+- Document repository.
+- Storage data source.
+
+**STEP 4 — Upload Engine**
+
+Implement:
+
+- File validation.
+- Storage path generation.
+- Upload engine.
+- Upload progress.
+- Persistent upload queue.
+- Offline support.
+- WorkManager integration.
+- Retry and recovery.
+
+**STEP 5 — Secure Access**
+
+Implement and test:
+
+- Storage Rules.
+- User authorization.
+- Business ownership checks.
+- Customer isolation.
+- Role-based access.
+
+**STEP 6 — Document Viewer**
+
+Implement image and PDF preview, secure download, and document information.
+
+**STEP 7 — Existing Screen Integration**
+
+Integrate the document functionality into:
+
+- Customer Profile.
+- CRM Leads.
+- Site Survey.
+- Project Pipeline.
+- Quotation Builder.
+- Finance and Payments.
+- Installation workflows.
+- Service workflows.
+- Admin workflows.
+
+Use the existing UI design system.
+
+**STEP 8 — Audit and Retention**
+
+Implement versioning, soft deletion, audit records, and retention controls.
+
+**STEP 9 — Testing**
+
+Run all relevant tests.
+
+Fix failures.
+
+Verify offline and online workflows.
+
+**STEP 10 — Final Documentation**
+
+Update all required documentation files.
+
+Provide a final implementation report.
+
+---
+
+# 21. FINAL ACCEPTANCE CRITERIA
+
+Phase 3 will only be considered complete when the following conditions are met:
+
+| Requirement | Acceptance condition |
+|---|---|
+| Firebase Storage | Correct project bucket configured and verified |
+| Room integration | Document entities persist correctly |
+| Firestore metadata | Document metadata synchronizes correctly |
+| Offline uploads | Uploads survive process termination |
+| Automatic synchronization | Uploads resume after reconnection |
+| Upload progress | Accurate progress displayed |
+| Image handling | Compression and thumbnails work |
+| PDF handling | Secure preview and download work |
+| RBAC | Role-based access is enforced |
+| Customer isolation | Cross-customer access is rejected |
+| Storage Rules | Automated security tests pass |
+| Document lifecycle | Versioning and deletion policies work |
+| Audit logging | Document activities are recorded |
+| UI integration | Existing screens support required workflows |
+| Build | Gradle build succeeds |
+| Regression | Existing Phase 1 and Phase 2 functionality remains operational |
+| Documentation | All required documentation files updated |
+
+---
+
+# 22. FINAL IMPLEMENTATION REPORT
+
+After completing the implementation, provide a detailed report containing:
+
+1. Executive summary.
+2. Existing architecture inspected.
+3. New files created.
+4. Existing files modified.
+5. Firebase configuration changes.
+6. Storage bucket verification.
+7. Storage directory structure.
+8. Room database changes.
+9. Firestore metadata changes.
+10. Storage security rules.
+11. RBAC permission implementation.
+12. Upload engine implementation.
+13. Offline upload implementation.
+14. WorkManager integration.
+15. Document viewer implementation.
+16. Existing screen integrations.
+17. Audit and retention implementation.
+18. Unit test results.
+19. Room test results.
+20. Firebase emulator test results.
+21. Integration test results.
+22. Build status.
+23. Known limitations.
+24. Remaining configuration steps.
+25. Phase 4 readiness assessment.
+
+For every feature, identify its status:
+
+- COMPLETED AND VERIFIED
+- IMPLEMENTED BUT NOT VERIFIED
+- PARTIALLY IMPLEMENTED
+- NOT IMPLEMENTED
+- BLOCKED BY FIREBASE CONFIGURATION
+
+Never mark a feature completed merely because source code was generated.
+
+If Firebase Console configuration, billing activation, bucket provisioning, or credentials require manual intervention, clearly identify the exact action required.
+
+---
+
+# FINAL DIRECTIVE
+
+Build Phase 3 as a genuine enterprise-grade extension of the existing HBX SOLAR ONE application.
+
+Think like an engineering team delivering a production system for a growing solar company, not like a code generator creating a demonstration.
+
+Prioritize security, data integrity, offline reliability, maintainability, and user experience.
+
+Preserve the existing application architecture and all 17 Stitch-designed screens.
+
+Inspect first. Implement second. Test third. Document last.
+
+**DO NOT STOP AFTER WRITING A PLAN. EXECUTE THE IMPLEMENTATION.**
+
+The final result must be a functioning, testable, secure Enterprise Cloud Storage and Document Management System integrated into HBX SOLAR ONE.

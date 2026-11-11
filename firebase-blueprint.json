@@ -1,0 +1,98 @@
+{
+  "entities": {
+    "User": {
+      "title": "User Profile",
+      "description": "Authenticated enterprise user profile with assigned role, territory, and status",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "description": "Unique user identifier matching Firebase Auth UID" },
+        "fullName": { "type": "string", "description": "Full name of the user" },
+        "email": { "type": "string", "description": "Work or personal email address" },
+        "phone": { "type": "string", "description": "Contact phone number" },
+        "role": {
+          "type": "string",
+          "enum": [
+            "SUPER_ADMIN",
+            "ADMIN",
+            "OPERATIONS_MANAGER",
+            "SALES_MANAGER",
+            "TEAM_LEADER",
+            "BDE",
+            "INSTALLATION_ENGINEER",
+            "SERVICE_ENGINEER",
+            "PARTNER",
+            "CUSTOMER"
+          ],
+          "description": "Role-based access tier"
+        },
+        "employeeId": { "type": "string", "description": "Corporate employee ID code or N/A for customers" },
+        "territoryId": { "type": "string", "description": "Assigned geographical district hub, e.g. Azamgarh, Mau" },
+        "accountStatus": {
+          "type": "string",
+          "enum": ["ACTIVE", "PENDING_APPROVAL", "SUSPENDED", "INACTIVE"],
+          "description": "Lifecycle state of the user account"
+        },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp via serverTimestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp via serverTimestamp" }
+      },
+      "required": ["uid", "fullName", "email", "phone", "role", "employeeId", "territoryId", "accountStatus", "createdAt", "updatedAt"]
+    },
+    "Lead": {
+      "title": "CRM Lead",
+      "description": "Solar rooftop project prospect or commercial customer opportunity",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique lead identifier" },
+        "name": { "type": "string", "description": "Customer name" },
+        "phone": { "type": "string", "description": "Customer contact number" },
+        "village": { "type": "string", "description": "Location or village name" },
+        "stage": { "type": "string", "description": "CRM pipeline stage" },
+        "priority": { "type": "string", "description": "Lead priority tier" },
+        "capacity": { "type": "string", "description": "Estimated plant capacity in kW" },
+        "systemType": { "type": "string", "description": "System architecture" },
+        "assignedTo": { "type": "string", "description": "Assignee name" },
+        "assignedToUid": { "type": "string", "description": "Assignee Firebase Auth UID" },
+        "followUpTime": { "type": "string", "description": "Next scheduled follow-up" },
+        "quoteRef": { "type": "string", "description": "Quotation reference code" },
+        "valueEstimate": { "type": "string", "description": "Estimated financial contract value" },
+        "notes": { "type": "array", "description": "Lead activity and site survey notes" },
+        "userId": { "type": "string", "description": "Creator or owner Firebase Auth UID" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp via serverTimestamp" },
+        "updatedAt": { "type": "string", "format": "date-time", "description": "Update timestamp via serverTimestamp" }
+      },
+      "required": ["id", "name", "phone", "village", "stage", "priority", "capacity", "systemType", "userId", "createdAt", "updatedAt"]
+    },
+    "Payment": {
+      "title": "Payment Record",
+      "description": "Manual financial ledger entry for token advance, milestone payment, or balance",
+      "type": "object",
+      "properties": {
+        "receiptId": { "type": "string", "description": "Official receipt number" },
+        "customerName": { "type": "string", "description": "Customer or commercial entity name" },
+        "consumerId": { "type": "string", "description": "10-digit Discom consumer connection ID" },
+        "amount": { "type": "number", "description": "Payment amount in INR" },
+        "method": { "type": "string", "description": "Mode of payment (UPI, Cash, Bank Transfer, Cheque)" },
+        "referenceNo": { "type": "string", "description": "Bank UTR or cash voucher reference" },
+        "status": { "type": "string", "enum": ["Verified", "Pending Verification", "Rejected"], "description": "Verification status" },
+        "verifiedBy": { "type": "string", "description": "Name or role of verifier" },
+        "userId": { "type": "string", "description": "Submitting agent Firebase Auth UID" },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Creation timestamp via serverTimestamp" }
+      },
+      "required": ["receiptId", "customerName", "consumerId", "amount", "method", "referenceNo", "status", "userId", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": { "$ref": "#/entities/User" },
+      "description": "Individual user profiles indexed by Firebase Auth UID"
+    },
+    "/leads/{leadId}": {
+      "schema": { "$ref": "#/entities/Lead" },
+      "description": "CRM leads and customer project opportunities"
+    },
+    "/payments/{paymentId}": {
+      "schema": { "$ref": "#/entities/Payment" },
+      "description": "Manual payments ledger and collection receipts"
+    }
+  }
+}

@@ -1,0 +1,752 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00020c", "tertiary-fixed-dim": "#b7c6ee", "inverse-surface": "#273044", "primary-container": "#101c36", "on-secondary-fixed": "#271900", "surface-dim": "#d0daf4", "main-bg": "#F5F7FA", "primary-fixed": "#d9e2ff", "inverse-on-surface": "#edf0ff", "on-tertiary-fixed-variant": "#374668", "surface-container-low": "#f1f3ff", "deep-navy": "#0B1428", "error": "#ba1a1a", "surface-container-high": "#e0e8ff", "text-primary": "#182235", "primary-fixed-dim": "#bbc6e8", "surface-bright": "#f9f9ff", "light-gold": "#E4CC96", "secondary-fixed": "#ffdea5", "tertiary-fixed": "#d8e2ff", "outline": "#75777e", "secondary-container": "#fed489", "on-surface-variant": "#45464d", "on-secondary-fixed-variant": "#5d4202", "on-background": "#111b2e", "on-tertiary-fixed": "#091b3a", "success": "#16865B", "secondary": "#775a1a", "on-primary": "#ffffff", "surface": "#FFFFFF", "secondary-fixed-dim": "#e9c178", "on-primary-fixed-variant": "#3b4663", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "tertiary": "#00020b", "on-tertiary": "#ffffff", "background": "#f9f9ff", "information": "#3977C5", "surface-container": "#e8edff", "on-error": "#ffffff", "on-primary-container": "#7984a4", "danger": "#D94B4B", "on-secondary-container": "#785a1b", "surface-container-highest": "#d8e2fc", "on-tertiary-container": "#7585aa", "outline-variant": "#c6c6ce", "surface-tint": "#535e7b", "tertiary-container": "#0a1c3b", "on-secondary": "#ffffff", "surface-variant": "#d8e2fc", "on-primary-fixed": "#0f1b35", "on-surface": "#111b2e", "text-secondary": "#64748B", "inverse-primary": "#bbc6e8", "on-error-container": "#93000a", "warning": "#D99527", "border-subtle": "#E5E9F0" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "1.5rem", "margin-mobile": "1rem", "space-md": "0.75rem", "space-xs": "0.25rem", "margin": "1.5rem", "space-sm": "0.5rem", "space-2xs": "0.125rem", "space-lg": "1rem", "space-3xl": "3rem", "gutter-compact": "0.5rem", "gutter": "1rem", "space-2xl": "2rem" }, fontFamily: { "label-lg": ["Inter"], "display-lg-mobile": ["Plus Jakarta Sans"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-md": ["Inter"], "mono-metric": ["Inter"], "body-sm": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-sm": ["Inter"], "headline-sm": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }, fontSize: { "label-lg": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }], "mono-metric": ["14px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#F5F7FA;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style></head><body class="bg-main-bg text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(11,20,40,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><div class="h-9 px-2 py-1 rounded-lg bg-deep-navy flex items-center justify-center flex-shrink-0 shadow-xs"><img alt="HBX SOLAR ONE Brand Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAc0RyQjlMwk4JrhS3uEDBaAZQyTOTE90o21Q7482OvnROAdGBJ2YiJF6IK4SP_kNDhfRUHmLDEATcb0sdoNIQO2Btp6ggZ9AuhbZzqHgMfJXWFyAH3HWsbc4M5Bas6JqKlEwwLmLiaD-JQc0wAlJVe6ZoSI-9YA51X7U-i6LSyZkoAHncgRJCUha0GEJKLxdZT2fWZVuaHl-IyBvlE9DxPo6SVUivwixGJfTwSoN3d3t-Wq6_8o6nn"></div><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary-container truncate font-bold">HBX SOLAR ONE</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-text-secondary text-[13px]">location_on</span><span class="font-label-sm text-label-sm text-text-secondary tracking-wide uppercase truncate">Azamgarh, UP</span><span class="inline-flex items-center gap-1 ml-1 px-1.5 py-0.5 rounded-full bg-surface-container text-success font-label-sm text-[9px]"><span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>Online</span></div></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center rounded-full text-primary-container hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-warning"></span></button><div class="relative flex items-center justify-center p-0.5 rounded-full ring-1 ring-light-gold"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvgJ5GLGYRNho-HW_LGF7944u5yJnSaE2dph78OCmR9Fmjg2YZxKAQmYpAz1RoaHO9ghYhK-VvYyi9wGQNIPD8GRm3F0_bm5QuH_w-P5XfQAe6mS51PAgTPU0HjDU63STjLjEXyOKfHFhQy5JKucj04UhTu1gvrGGkq-z_y3vhyrCrFHI_IofhXd8XFQoZPwbwxwiGgKI2ThiyE_t093faR-s8zhInReFVgIQZM7I"></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-main-bg"><div class="flex flex-col w-full pb-24">
+<!-- Top Tonal Context & Quick Telemetry Header -->
+<div class="px-margin-mobile pt-3 pb-2 flex flex-col gap-2.5">
+<!-- Live Operational Metric Strip -->
+<div class="bg-primary-container text-on-primary rounded-xl p-3 shadow-md flex items-center justify-between gap-2 overflow-hidden relative">
+<div class="absolute -right-6 -bottom-6 w-24 h-24 bg-light-gold/10 rounded-full blur-xl pointer-events-none"></div>
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-9 h-9 rounded-lg bg-surface/10 flex items-center justify-center text-light-gold flex-shrink-0">
+<span class="material-symbols-outlined text-[20px]">hub</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-surface-variant uppercase tracking-wider">Territory Pipeline</span>
+<span class="font-headline-sm text-headline-sm font-bold text-on-primary truncate">₹1.42 Cr <span class="font-label-sm text-label-sm font-normal text-secondary-fixed opacity-90">(48 Active)</span></span>
+</div>
+</div>
+<div class="flex items-center gap-3 flex-shrink-0 pl-2">
+<div class="flex flex-col text-right">
+<span class="font-label-sm text-label-sm text-surface-variant uppercase">Win Rate</span>
+<span class="font-mono-metric text-mono-metric font-semibold text-light-gold flex items-center justify-end gap-0.5">
+            28.5%
+            <span class="material-symbols-outlined text-[13px] text-success font-bold">trending_up</span>
+</span>
+</div>
+<button aria-label="Export lead dossier" class="w-8 h-8 rounded-lg bg-surface/10 hover:bg-surface/20 flex items-center justify-center text-surface transition-colors" id="exportCsvBtn">
+<span class="material-symbols-outlined text-[18px]">download</span>
+</button>
+</div>
+</div>
+<!-- Search Box with Clear & Quick Voice action -->
+<div class="relative flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-text-secondary text-[20px] pointer-events-none">search</span>
+<input class="w-full h-11 pl-10 pr-20 bg-surface rounded-xl font-body-md text-body-md text-text-primary placeholder:text-outline shadow-sm focus:outline-none focus:ring-1 focus:ring-deep-navy transition-all" id="crmSearchInput" placeholder="Search customer name, mobile, village or ID..." type="search">
+<div class="absolute right-2.5 flex items-center gap-1">
+<button aria-label="Clear query" class="hidden w-7 h-7 rounded-full items-center justify-center text-text-secondary hover:text-text-primary" id="clearSearchBtn">
+<span class="material-symbols-outlined text-[16px]">cancel</span>
+</button>
+<span class="w-[1px] h-4 bg-border-subtle mx-0.5"></span>
+<button aria-label="Voice filter" class="w-7 h-7 rounded-full flex items-center justify-center text-text-secondary hover:text-primary transition-colors" id="voiceSearchBtn">
+<span class="material-symbols-outlined text-[18px]">mic</span>
+</button>
+</div>
+</div>
+<!-- Filter Pills Carousel -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-0.5 pt-0.5 no-scrollbar -mx-margin-mobile px-margin-mobile">
+<button class="filter-chip active flex-shrink-0 px-3 py-1.5 rounded-full font-label-md text-label-md bg-deep-navy text-on-primary transition-all flex items-center gap-1 shadow-sm" data-filter="all">
+<span class="">All</span>
+<span class="px-1.5 py-0.2 bg-surface/20 rounded-full text-[10px]">48</span>
+</button>
+<button class="filter-chip flex-shrink-0 px-3 py-1.5 rounded-full font-label-md text-label-md bg-surface text-text-secondary hover:bg-surface-container-high transition-all flex items-center gap-1 shadow-sm" data-filter="new">
+<span class="">New Leads</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full text-text-primary text-[10px]">12</span>
+</button>
+<button class="filter-chip flex-shrink-0 px-3 py-1.5 rounded-full font-label-md text-label-md bg-surface text-text-secondary hover:bg-surface-container-high transition-all flex items-center gap-1 shadow-sm" data-filter="survey">
+<span class="">Survey Pending</span>
+<span class="px-1.5 py-0.2 bg-secondary-container/50 text-on-secondary-fixed rounded-full text-[10px]">8</span>
+</button>
+<button class="filter-chip flex-shrink-0 px-3 py-1.5 rounded-full font-label-md text-label-md bg-surface text-text-secondary hover:bg-surface-container-high transition-all flex items-center gap-1 shadow-sm" data-filter="quotation">
+<span class="">Quotation Shared</span>
+<span class="px-1.5 py-0.2 bg-surface-container-high rounded-full text-text-primary text-[10px]">14</span>
+</button>
+<button class="filter-chip flex-shrink-0 px-3 py-1.5 rounded-full font-label-md text-label-md bg-surface text-text-secondary hover:bg-surface-container-high transition-all flex items-center gap-1 shadow-sm" data-filter="approved">
+<span class="">Approved</span>
+<span class="px-1.5 py-0.2 bg-surface-container text-success rounded-full text-[10px]">14</span>
+</button>
+</div>
+<!-- Active Filter Meta & Sort Dropdown -->
+<div class="flex items-center justify-between pt-1 text-text-secondary">
+<div class="flex items-center gap-1.5">
+<span class="font-label-sm text-label-sm uppercase tracking-wider font-semibold text-text-secondary">Showing</span>
+<span class="font-label-sm text-label-sm font-bold text-text-primary bg-surface-container px-2 py-0.5 rounded-full" id="filteredCountText">4 Leads</span>
+</div>
+<div class="relative inline-flex items-center">
+<button class="flex items-center gap-1 bg-surface py-1 px-2.5 rounded-lg shadow-sm font-label-md text-label-md text-text-primary hover:bg-surface-container transition-colors" id="sortDropdownToggle">
+<span class="material-symbols-outlined text-[15px] text-text-secondary">sort</span>
+<span class="truncate max-w-[140px]" id="activeSortLabel">Next Follow-up (Earliest)</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+<!-- Sort Popover Menu -->
+<div class="hidden absolute right-0 top-full mt-1.5 w-52 bg-surface rounded-xl shadow-xl p-1.5 z-40 flex flex-col gap-0.5" id="sortMenu">
+<button class="sort-option w-full text-left px-2.5 py-2 rounded-lg font-label-md text-label-md bg-surface-container-high text-primary font-semibold flex items-center justify-between" data-sort="followup-asc">
+<span class="">Next Follow-up (Earliest)</span>
+<span class="material-symbols-outlined text-[16px] text-primary">check</span>
+</button>
+<button class="sort-option w-full text-left px-2.5 py-2 rounded-lg font-label-md text-label-md text-text-primary hover:bg-surface-container transition-colors flex items-center justify-between" data-sort="value-desc">
+<span class="">Lead Value (Highest)</span>
+</button>
+<button class="sort-option w-full text-left px-2.5 py-2 rounded-lg font-label-md text-label-md text-text-primary hover:bg-surface-container transition-colors flex items-center justify-between" data-sort="capacity-desc">
+<span class="">Solar Capacity (kW)</span>
+</button>
+<button class="sort-option w-full text-left px-2.5 py-2 rounded-lg font-label-md text-label-md text-text-primary hover:bg-surface-container transition-colors flex items-center justify-between" data-sort="recent">
+<span class="">Recently Added</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Lead Cards Feed -->
+<div class="flex flex-col gap-3 px-margin-mobile pt-1" id="leadsListContainer">
+<!-- Customer 1 -->
+<div class="lead-card bg-surface rounded-xl p-3.5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-2.5" data-category="quotation" data-name="Amit Singh" data-phone="98391" data-village="Harraiya">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center font-headline-sm font-bold flex-shrink-0">
+            AS
+          </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary truncate">Amit Singh</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-danger/10 text-danger font-bold tracking-wider uppercase">High Priority</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span class="font-mono-metric text-mono-metric text-text-secondary">+91 98391 XXXXX</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-body-sm text-body-sm truncate">Vill. Harraiya, Azamgarh</span>
+</div>
+</div>
+</div>
+<!-- Material 3 Status Badge -->
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold tracking-wide uppercase bg-[#3977C5]/10 text-information flex-shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-information"></span>
+          Quotation Shared
+        </span>
+</div>
+<!-- Solar System & Commercial Spec Bento -->
+<div class="grid grid-cols-2 gap-2 bg-main-bg p-2.5 rounded-lg text-text-primary">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">solar_power</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Config</span>
+<span class="font-body-md text-body-md font-semibold truncate">3 kW On-Grid Rooftop</span>
+</div>
+</div>
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">badge</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Assigned To</span>
+<span class="font-body-md text-body-md font-semibold truncate text-primary-container">Rahul Kumar (You)</span>
+</div>
+</div>
+</div>
+<!-- Follow-up Alert Bar -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-warning/10 text-on-surface">
+<div class="flex items-center gap-1.5 text-warning font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[16px] animate-pulse">alarm</span>
+<span class="">Follow-up: <span class="text-text-primary font-bold">Today, 11:30 AM</span></span>
+</div>
+<span class="font-label-sm text-label-sm text-text-secondary">Quote Ref: #HBX-8821</span>
+</div>
+<!-- Quick Action Floating Buttons -->
+<div class="flex items-center justify-between gap-1.5 pt-0.5">
+<div class="flex items-center gap-1.5 flex-1">
+<a aria-label="Call Amit Singh" class="flex-1 h-9 rounded-lg bg-surface-container-high hover:bg-surface-container text-deep-navy font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" href="tel:+919839100000">
+<span class="material-symbols-outlined text-[16px] text-deep-navy">call</span>
+<span class="">Call</span>
+</a>
+<button aria-label="WhatsApp Amit Singh" class="flex-1 h-9 rounded-lg bg-success/15 hover:bg-success/20 text-success font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="whatsapp" data-name="Amit Singh">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span class="">WhatsApp</span>
+</button>
+<button aria-label="Add note to Amit Singh" class="h-9 w-9 rounded-lg bg-surface-container hover:bg-surface-container-high text-text-secondary flex items-center justify-center transition-colors" data-action="add-note" data-name="Amit Singh">
+<span class="material-symbols-outlined text-[17px]">edit_note</span>
+</button>
+</div>
+<button class="h-9 px-3 rounded-lg bg-deep-navy hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="dossier" data-name="Amit Singh">
+<span class="">Dossier</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Customer 2 -->
+<div class="lead-card bg-surface rounded-xl p-3.5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-2.5" data-category="survey" data-name="Rajeshwar Prasad" data-phone="94152" data-village="Phoolpur">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center font-headline-sm font-bold flex-shrink-0">
+            RP
+          </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary truncate">Rajeshwar Prasad</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-surface-container text-text-secondary font-semibold uppercase">Consumer</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span class="font-mono-metric text-mono-metric text-text-secondary">+91 94152 XXXXX</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-body-sm text-body-sm truncate">Phoolpur, Azamgarh</span>
+</div>
+</div>
+</div>
+<!-- Material 3 Status Badge: Survey Scheduled (Warning/Pending Yellow) -->
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold tracking-wide uppercase bg-warning/10 text-warning flex-shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+          Survey Scheduled
+        </span>
+</div>
+<!-- Solar System & Technical Load Spec -->
+<div class="grid grid-cols-2 gap-2 bg-main-bg p-2.5 rounded-lg text-text-primary">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">battery_charging_full</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">System</span>
+<span class="font-body-md text-body-md font-semibold truncate">5 kW Hybrid System</span>
+</div>
+</div>
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">speed</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Sanctioned Load</span>
+<span class="font-body-md text-body-md font-semibold truncate">4.0 kW Discom</span>
+</div>
+</div>
+</div>
+<!-- Site Visit Context Bar -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-surface-container text-text-primary">
+<div class="flex items-center gap-1.5 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-information">event</span>
+<span class="">Survey: <span class="font-bold">Tomorrow 10:00 AM</span></span>
+</div>
+<span class="font-label-sm text-label-sm text-success font-semibold flex items-center gap-0.5">
+<span class="material-symbols-outlined text-[13px]">engineering</span>
+          Tech Assigned
+        </span>
+</div>
+<!-- Action Row -->
+<div class="flex items-center justify-between gap-1.5 pt-0.5">
+<div class="flex items-center gap-1.5 flex-1">
+<a aria-label="Call Rajeshwar Prasad" class="flex-1 h-9 rounded-lg bg-surface-container-high hover:bg-surface-container text-deep-navy font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" href="tel:+919415200000">
+<span class="material-symbols-outlined text-[16px] text-deep-navy">call</span>
+<span class="">Call</span>
+</a>
+<button aria-label="WhatsApp Rajeshwar Prasad" class="flex-1 h-9 rounded-lg bg-success/15 hover:bg-success/20 text-success font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="whatsapp" data-name="Rajeshwar Prasad">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span class="">WhatsApp</span>
+</button>
+<button aria-label="Add note" class="h-9 w-9 rounded-lg bg-surface-container hover:bg-surface-container-high text-text-secondary flex items-center justify-center transition-colors" data-action="add-note" data-name="Rajeshwar Prasad">
+<span class="material-symbols-outlined text-[17px]">edit_note</span>
+</button>
+</div>
+<button class="h-9 px-3 rounded-lg bg-deep-navy hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="dossier" data-name="Rajeshwar Prasad">
+<span class="">Dossier</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Customer 3 -->
+<div class="lead-card bg-surface rounded-xl p-3.5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-2.5" data-category="approved" data-name="Kisan Cold Storage Dr V Verma" data-phone="97920" data-village="Sagri">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-light-gold flex items-center justify-center font-headline-sm font-bold flex-shrink-0">
+            KC
+          </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary truncate">Kisan Cold Storage</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-light-gold/30 text-on-secondary-fixed font-bold tracking-wider uppercase">C&amp;I Commercial</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary mt-0.5">
+<span class="font-body-sm text-body-sm font-medium text-text-primary">Dr. V. Verma</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span class="font-mono-metric text-mono-metric">+91 97920 XXXXX</span>
+</div>
+<div class="flex items-center gap-1 text-text-secondary mt-0.5">
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-body-sm text-body-sm truncate">Sagri, Azamgarh Industrial Sector</span>
+</div>
+</div>
+</div>
+<!-- Status Badge: Technical Assessment -->
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold tracking-wide uppercase bg-[#3977C5]/10 text-information flex-shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-information"></span>
+          Assessment
+        </span>
+</div>
+<!-- High-Value Commercial Spec Bento -->
+<div class="grid grid-cols-2 gap-2 bg-main-bg p-2.5 rounded-lg text-text-primary">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">factory</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Plant Size</span>
+<span class="font-body-md text-body-md font-bold truncate">25 kW Commercial</span>
+</div>
+</div>
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">payments</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Project Budget</span>
+<span class="font-body-md text-body-md font-bold text-success truncate">₹18.5 Lakhs</span>
+</div>
+</div>
+</div>
+<!-- High Capital Alert -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-surface-container text-deep-navy">
+<div class="flex items-center gap-1.5 font-label-md text-label-md font-semibold">
+<span class="material-symbols-outlined text-[16px] text-light-gold">verified</span>
+<span class="">Feasibility Study: <span class="text-success font-bold">Passed 98.4%</span></span>
+</div>
+<span class="font-label-sm text-label-sm text-text-secondary">Assigned: Key Accounts</span>
+</div>
+<!-- Action Row -->
+<div class="flex items-center justify-between gap-1.5 pt-0.5">
+<div class="flex items-center gap-1.5 flex-1">
+<a aria-label="Call Kisan Cold Storage" class="flex-1 h-9 rounded-lg bg-surface-container-high hover:bg-surface-container text-deep-navy font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" href="tel:+919792000000">
+<span class="material-symbols-outlined text-[16px] text-deep-navy">call</span>
+<span class="">Call</span>
+</a>
+<button aria-label="WhatsApp Dr. Verma" class="flex-1 h-9 rounded-lg bg-success/15 hover:bg-success/20 text-success font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="whatsapp" data-name="Dr. V. Verma">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span class="">WhatsApp</span>
+</button>
+<button aria-label="Add note" class="h-9 w-9 rounded-lg bg-surface-container hover:bg-surface-container-high text-text-secondary flex items-center justify-center transition-colors" data-action="add-note" data-name="Kisan Cold Storage">
+<span class="material-symbols-outlined text-[17px]">edit_note</span>
+</button>
+</div>
+<button class="h-9 px-3 rounded-lg bg-deep-navy hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="dossier" data-name="Kisan Cold Storage">
+<span class="">Dossier</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Customer 4 -->
+<div class="lead-card bg-surface rounded-xl p-3.5 shadow-sm hover:shadow-md transition-shadow relative overflow-hidden flex flex-col gap-2.5" data-category="new" data-name="Meena Devi" data-phone="91254" data-village="Mubarakpur">
+<div class="flex items-start justify-between gap-2">
+<div class="flex items-start gap-2.5 min-w-0">
+<div class="w-10 h-10 rounded-xl bg-surface-container-high text-primary flex items-center justify-center font-headline-sm font-bold flex-shrink-0">
+            MD
+          </div>
+<div class="flex flex-col min-w-0">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary truncate">Meena Devi</span>
+<span class="font-label-sm text-label-sm px-1.5 py-0.5 rounded-full bg-surface-container text-information font-semibold uppercase">Govt Subsidy</span>
+</div>
+<div class="flex items-center gap-1.5 text-text-secondary mt-0.5">
+<span class="material-symbols-outlined text-[14px]">call</span>
+<span class="font-mono-metric text-mono-metric text-text-secondary">+91 91254 XXXXX</span>
+<span class="inline-block w-1 h-1 rounded-full bg-outline-variant"></span>
+<span class="material-symbols-outlined text-[14px]">location_on</span>
+<span class="font-body-sm text-body-sm truncate">Mubarakpur, Azamgarh</span>
+</div>
+</div>
+</div>
+<!-- Material 3 Status Badge: Document Collection (In-Review / Neutral Blue) -->
+<span class="px-2 py-0.5 rounded-full font-label-sm text-label-sm font-semibold tracking-wide uppercase bg-secondary-container/40 text-on-secondary-fixed flex-shrink-0 flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-warning"></span>
+          Doc Collection
+        </span>
+</div>
+<!-- Scheme Details -->
+<div class="grid grid-cols-2 gap-2 bg-main-bg p-2.5 rounded-lg text-text-primary">
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">wb_sunny</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Initiative</span>
+<span class="font-body-md text-body-md font-semibold truncate">PM Surya Ghar</span>
+</div>
+</div>
+<div class="flex items-center gap-2 min-w-0">
+<div class="w-7 h-7 rounded bg-surface flex items-center justify-center text-primary-container shadow-xs flex-shrink-0">
+<span class="material-symbols-outlined text-[17px]">bolt</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Target Cap</span>
+<span class="font-body-md text-body-md font-semibold truncate">2 kW Rooftop</span>
+</div>
+</div>
+</div>
+<!-- Next Action Call Scheduled -->
+<div class="flex items-center justify-between px-2.5 py-1.5 rounded-lg bg-surface-container text-text-primary">
+<div class="flex items-center gap-1.5 font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-text-secondary">phone_callback</span>
+<span class="">Next Call: <span class="font-bold text-text-primary">12 Nov, Morning</span></span>
+</div>
+<span class="font-label-sm text-label-sm text-warning font-semibold">Electricity Bill Pending</span>
+</div>
+<!-- Action Row -->
+<div class="flex items-center justify-between gap-1.5 pt-0.5">
+<div class="flex items-center gap-1.5 flex-1">
+<a aria-label="Call Meena Devi" class="flex-1 h-9 rounded-lg bg-surface-container-high hover:bg-surface-container text-deep-navy font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" href="tel:+919125400000">
+<span class="material-symbols-outlined text-[16px] text-deep-navy">call</span>
+<span class="">Call</span>
+</a>
+<button aria-label="WhatsApp Meena Devi" class="flex-1 h-9 rounded-lg bg-success/15 hover:bg-success/20 text-success font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="whatsapp" data-name="Meena Devi">
+<span class="material-symbols-outlined text-[16px]">chat</span>
+<span class="">WhatsApp</span>
+</button>
+<button aria-label="Add note" class="h-9 w-9 rounded-lg bg-surface-container hover:bg-surface-container-high text-text-secondary flex items-center justify-center transition-colors" data-action="add-note" data-name="Meena Devi">
+<span class="material-symbols-outlined text-[17px]">edit_note</span>
+</button>
+</div>
+<button class="h-9 px-3 rounded-lg bg-deep-navy hover:bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center gap-1 transition-colors" data-action="dossier" data-name="Meena Devi">
+<span class="">Dossier</span>
+<span class="material-symbols-outlined text-[15px]">arrow_forward</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Empty State (Shown when search/filter has zero matches) -->
+<div class="hidden flex flex-col items-center justify-center text-center px-6 py-12 gap-3" id="noResultsState">
+<div class="w-16 h-16 rounded-full bg-surface-container-high flex items-center justify-center text-text-secondary mb-1">
+<span class="material-symbols-outlined text-[32px]">manage_search</span>
+</div>
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary">No Matching Solar Leads</span>
+<p class="font-body-md text-body-md text-text-secondary max-w-xs">
+      No customer profile matches your current filters or query. Try resetting filters or register a new field lead.
+    </p>
+<button class="mt-2 px-4 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high text-primary font-label-md text-label-md font-semibold transition-colors" id="resetFiltersBtn">
+      Reset All Filters
+    </button>
+</div>
+<!-- Docked Secondary Sticky Action: Floating Onboarding Trigger -->
+<div class="fixed bottom-20 right-4 z-40">
+<button class="flex items-center gap-2 bg-light-gold text-deep-navy pl-3.5 pr-4 py-2.5 rounded-full shadow-lg hover:shadow-xl active:scale-95 transition-all font-label-md text-label-md font-bold tracking-tight border-0" id="openOnboardingBtn">
+<div class="w-6 h-6 rounded-full bg-deep-navy text-light-gold flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[18px]">add</span>
+</div>
+<span class="">New Customer Onboarding</span>
+</button>
+</div>
+<!-- Interactive Slide-over / Modal for Quick Notes -->
+<div class="fixed inset-0 z-50 bg-deep-navy/40 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4" id="noteModal">
+<div class="bg-surface w-full sm:max-w-md rounded-t-2xl sm:rounded-2xl p-5 shadow-2xl flex flex-col gap-4 animate-in fade-in slide-in-from-bottom duration-200">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[22px]">note_add</span>
+<span class="font-headline-sm text-headline-sm font-bold text-text-primary">Lead Interaction Note</span>
+</div>
+<button aria-label="Close dialog" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-text-secondary hover:text-text-primary" id="closeNoteModal">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase">Lead</label>
+<div class="font-body-md text-body-md font-semibold text-text-primary bg-surface-container-low p-2 rounded-lg" id="modalLeadName">
+          Amit Singh
+        </div>
+</div>
+<div class="flex flex-col gap-1.5">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase" for="leadNoteText">Remarks / Field Findings</label>
+<textarea class="w-full p-2.5 bg-main-bg rounded-lg font-body-md text-body-md text-text-primary placeholder:text-outline focus:outline-none focus:ring-1 focus:ring-deep-navy resize-none" id="leadNoteText" placeholder="Enter notes on shadow inspection, discom sanction, subsidy docs, or loan terms..." rows="3"></textarea>
+</div>
+<div class="flex items-center justify-end gap-2 pt-1">
+<button class="px-3.5 py-2 rounded-lg bg-surface-container hover:bg-surface-container-high font-label-md text-label-md text-text-primary font-medium transition-colors" id="cancelNoteBtn">
+          Cancel
+        </button>
+<button class="px-4 py-2 rounded-lg bg-deep-navy hover:bg-primary-container font-label-md text-label-md text-on-primary font-bold shadow-sm transition-colors flex items-center gap-1.5" id="saveNoteBtn">
+<span class="material-symbols-outlined text-[16px]">check</span>
+<span class="">Save Activity Note</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Interactive Slide-over / Modal for Onboarding -->
+<div class="fixed inset-0 z-50 bg-deep-navy/40 backdrop-blur-xs hidden flex items-end sm:items-center justify-center p-0 sm:p-4" id="onboardingModal">
+<div class="bg-surface w-full sm:max-w-lg rounded-t-2xl sm:rounded-2xl p-5 shadow-2xl flex flex-col gap-4 max-h-[90vh] overflow-y-auto">
+<div class="flex items-center justify-between border-b pb-2">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-light-gold/30 text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[20px]">person_add</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-text-primary">Register Solar Prospect</h3>
+<span class="font-label-sm text-label-sm text-text-secondary">Direct UP-NEDA &amp; Discom sync</span>
+</div>
+</div>
+<button aria-label="Close dialog" class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center text-text-secondary hover:text-text-primary" id="closeOnboardingModal">
+<span class="material-symbols-outlined text-[18px]">close</span>
+</button>
+</div>
+<form class="flex flex-col gap-3" id="onboardingForm">
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase">Full Name *</label>
+<input class="h-10 px-3 bg-main-bg rounded-lg font-body-md text-body-md text-text-primary focus:outline-none focus:ring-1 focus:ring-deep-navy" placeholder="e.g. Ramesh Chandra Yadav" required="" type="text">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase">Mobile Number *</label>
+<input class="h-10 px-3 bg-main-bg rounded-lg font-body-md text-body-md text-text-primary focus:outline-none focus:ring-1 focus:ring-deep-navy" placeholder="+91 9XXXX XXXXX" required="" type="tel">
+</div>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase">Village / Locality *</label>
+<input class="h-10 px-3 bg-main-bg rounded-lg font-body-md text-body-md text-text-primary focus:outline-none focus:ring-1 focus:ring-deep-navy" placeholder="e.g. Bilariaganj, Azamgarh" required="" type="text">
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase">Estimated Capacity</label>
+<select class="h-10 px-3 bg-main-bg rounded-lg font-body-md text-body-md text-text-primary focus:outline-none focus:ring-1 focus:ring-deep-navy">
+<option value="2kw">2 kW (PM Surya Ghar)</option>
+<option selected="" value="3kw">3 kW Rooftop On-Grid</option>
+<option value="5kw">5 kW Hybrid Storage</option>
+<option value="10kw">10 kW+ Commercial</option>
+<option value="25kw">25 kW+ Industrial C&amp;I</option>
+</select>
+</div>
+</div>
+<div class="flex flex-col gap-1">
+<label class="font-label-sm text-label-sm font-semibold text-text-secondary uppercase">Priority &amp; Channel</label>
+<div class="grid grid-cols-3 gap-2">
+<label class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-main-bg cursor-pointer hover:bg-surface-container font-label-sm text-label-sm">
+<input checked="" class="accent-deep-navy" name="lead_priority" type="radio" value="high">
+<span class="">High (7d)</span>
+</label>
+<label class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-main-bg cursor-pointer hover:bg-surface-container font-label-sm text-label-sm">
+<input class="accent-deep-navy" name="lead_priority" type="radio" value="standard">
+<span class="">Standard</span>
+</label>
+<label class="flex items-center justify-center gap-1.5 p-2 rounded-lg bg-main-bg cursor-pointer hover:bg-surface-container font-label-sm text-label-sm">
+<input class="accent-deep-navy" name="lead_priority" type="radio" value="subsidy">
+<span class="">Govt Portal</span>
+</label>
+</div>
+</div>
+<div class="flex items-center justify-end gap-2 pt-2 border-t mt-1">
+<button class="px-4 py-2 rounded-lg bg-surface-container font-label-md text-label-md text-text-primary" id="cancelOnboardingBtn" type="button">
+            Cancel
+          </button>
+<button class="px-5 py-2 rounded-lg bg-light-gold text-deep-navy font-label-md text-label-md font-bold shadow-md hover:bg-secondary-fixed transition-colors" type="submit">
+            Create Prospect Record
+          </button>
+</div>
+</form>
+</div>
+</div>
+<!-- Toast Notification -->
+<div class="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-primary-container text-on-primary px-4 py-2 rounded-xl shadow-xl font-label-md text-label-md flex items-center gap-2 opacity-0 pointer-events-none transition-opacity duration-200" id="crmToast">
+<span class="material-symbols-outlined text-[18px] text-light-gold" id="toastIcon">check_circle</span>
+<span id="toastMessage" class="">Lead updated successfully</span>
+</div>
+</div>
+<script>
+  (function initCRMDirectory() {
+    const searchInput = document.getElementById('crmSearchInput');
+    const clearSearchBtn = document.getElementById('clearSearchBtn');
+    const filterChips = document.querySelectorAll('.filter-chip');
+    const leadCards = document.querySelectorAll('.lead-card');
+    const noResults = document.getElementById('noResultsState');
+    const filteredCountText = document.getElementById('filteredCountText');
+    const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+
+    // Sort Dropdown Elements
+    const sortDropdownToggle = document.getElementById('sortDropdownToggle');
+    const sortMenu = document.getElementById('sortMenu');
+    const sortOptions = document.querySelectorAll('.sort-option');
+    const activeSortLabel = document.getElementById('activeSortLabel');
+
+    // Modal Elements
+    const noteModal = document.getElementById('noteModal');
+    const closeNoteModal = document.getElementById('closeNoteModal');
+    const cancelNoteBtn = document.getElementById('cancelNoteBtn');
+    const saveNoteBtn = document.getElementById('saveNoteBtn');
+    const modalLeadName = document.getElementById('modalLeadName');
+    const leadNoteText = document.getElementById('leadNoteText');
+
+    const openOnboardingBtn = document.getElementById('openOnboardingBtn');
+    const onboardingModal = document.getElementById('onboardingModal');
+    const closeOnboardingModal = document.getElementById('closeOnboardingModal');
+    const cancelOnboardingBtn = document.getElementById('cancelOnboardingBtn');
+    const onboardingForm = document.getElementById('onboardingForm');
+
+    // Toast
+    const toast = document.getElementById('crmToast');
+    const toastMessage = document.getElementById('toastMessage');
+
+    let currentFilter = 'all';
+
+    function showToast(msg, isSuccess = true) {
+      toastMessage.textContent = msg;
+      toast.classList.remove('opacity-0', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('opacity-0', 'pointer-events-none');
+      }, 2500);
+    }
+
+    function applyFilterAndSearch() {
+      const query = (searchInput.value || '').trim().toLowerCase();
+      let visibleCount = 0;
+
+      clearSearchBtn.classList.toggle('hidden', query.length === 0);
+      clearSearchBtn.classList.toggle('flex', query.length > 0);
+
+      leadCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const name = (card.getAttribute('data-name') || '').toLowerCase();
+        const village = (card.getAttribute('data-village') || '').toLowerCase();
+        const phone = (card.getAttribute('data-phone') || '').toLowerCase();
+
+        const matchesFilter = currentFilter === 'all' || category === currentFilter;
+        const matchesQuery = query === '' || name.includes(query) || village.includes(query) || phone.includes(query);
+
+        if (matchesFilter && matchesQuery) {
+          card.classList.remove('hidden');
+          visibleCount++;
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+
+      filteredCountText.textContent = visibleCount + (visibleCount === 1 ? ' Lead' : ' Leads');
+
+      if (visibleCount === 0) {
+        noResults.classList.remove('hidden');
+      } else {
+        noResults.classList.add('hidden');
+      }
+    }
+
+    // Filter Chips Event
+    filterChips.forEach(chip => {
+      chip.addEventListener('click', () => {
+        filterChips.forEach(c => {
+          c.classList.remove('bg-deep-navy', 'text-on-primary');
+          c.classList.add('bg-surface', 'text-text-secondary');
+        });
+        chip.classList.add('bg-deep-navy', 'text-on-primary');
+        chip.classList.remove('bg-surface', 'text-text-secondary');
+
+        currentFilter = chip.getAttribute('data-filter');
+        applyFilterAndSearch();
+      });
+    });
+
+    // Search Box Listener
+    searchInput.addEventListener('input', applyFilterAndSearch);
+
+    clearSearchBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      applyFilterAndSearch();
+      searchInput.focus();
+    });
+
+    resetFiltersBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      currentFilter = 'all';
+      filterChips[0].click();
+    });
+
+    // Sort Dropdown Toggle
+    sortDropdownToggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      sortMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', () => {
+      if (!sortMenu.classList.contains('hidden')) {
+        sortMenu.classList.add('hidden');
+      }
+    });
+
+    sortOptions.forEach(opt => {
+      opt.addEventListener('click', () => {
+        activeSortLabel.textContent = opt.querySelector('span').textContent;
+        sortOptions.forEach(o => {
+          o.classList.remove('bg-surface-container-high', 'text-primary', 'font-semibold');
+          o.classList.add('text-text-primary');
+          const check = o.querySelector('.material-symbols-outlined');
+          if (check) check.remove();
+        });
+
+        opt.classList.add('bg-surface-container-high', 'text-primary', 'font-semibold');
+        const checkIcon = document.createElement('span');
+        checkIcon.className = 'material-symbols-outlined text-[16px] text-primary';
+        checkIcon.textContent = 'check';
+        opt.appendChild(checkIcon);
+
+        showToast('Sorting applied: ' + activeSortLabel.textContent);
+      });
+    });
+
+    // Lead Card Actions Delegation
+    document.getElementById('leadsListContainer').addEventListener('click', (e) => {
+      const target = e.target.closest('button');
+      if (!target) return;
+
+      const action = target.getAttribute('data-action');
+      const leadName = target.getAttribute('data-name');
+
+      if (action === 'whatsapp') {
+        showToast('Opening WhatsApp link for ' + leadName);
+      } else if (action === 'add-note') {
+        modalLeadName.textContent = leadName;
+        leadNoteText.value = '';
+        noteModal.classList.remove('hidden');
+      } else if (action === 'dossier') {
+        showToast('Loading full technical dossier: ' + leadName);
+      }
+    });
+
+    // Note Modal Controls
+    function closeNote() {
+      noteModal.classList.add('hidden');
+    }
+    closeNoteModal.addEventListener('click', closeNote);
+    cancelNoteBtn.addEventListener('click', closeNote);
+    saveNoteBtn.addEventListener('click', () => {
+      const note = leadNoteText.value.trim();
+      if (!note) {
+        showToast('Please type a brief observation note', false);
+        return;
+      }
+      closeNote();
+      showToast('Interaction logged for ' + modalLeadName.textContent);
+    });
+
+    // Onboarding Modal Controls
+    openOnboardingBtn.addEventListener('click', () => {
+      onboardingModal.classList.remove('hidden');
+    });
+
+    function closeOnboarding() {
+      onboardingModal.classList.add('hidden');
+    }
+    closeOnboardingModal.addEventListener('click', closeOnboarding);
+    cancelOnboardingBtn.addEventListener('click', closeOnboarding);
+
+    onboardingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      closeOnboarding();
+      showToast('Prospect onboarded & queued for initial survey');
+      onboardingForm.reset();
+    });
+
+    // Export dossier button
+    document.getElementById('exportCsvBtn').addEventListener('click', () => {
+      showToast('Exporting 48 customer dossiers to Excel (.xlsx)');
+    });
+
+    // Voice search micro-interaction
+    document.getElementById('voiceSearchBtn').addEventListener('click', () => {
+      showToast('Listening for Hindi / English lead query...');
+    });
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(11,20,40,0.06)]" data-active-classes="[&amp;_[data-indicator]]:bg-secondary-container/40 [&amp;_[data-indicator]]:text-primary-container [&amp;_[data-icon]]:text-primary-container [&amp;_[data-label]]:text-primary-container [&amp;_[data-label]]:font-semibold"><div class="h-16 flex items-center justify-around px-gutter-compact"><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="dashboard" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">solar_power</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Home</span></a><a aria-current="page" class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px] [&amp;_[data-indicator]]:bg-secondary-container/40 [&amp;_[data-indicator]]:text-primary-container [&amp;_[data-icon]]:text-primary-container [&amp;_[data-label]]:text-primary-container [&amp;_[data-label]]:font-semibold" data-path="crm" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">groups</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Customers</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="field-operations" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">assignment_turned_in</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Tasks</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="solar-installations" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">precision_manufacturing</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Projects</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="employee-settings" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">badge</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Profile</span></a></div></nav>
+
+</body></html>

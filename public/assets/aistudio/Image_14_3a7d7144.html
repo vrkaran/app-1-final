@@ -1,0 +1,400 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><meta content="mobile_tab" name="shell-type"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "primary": "#00020c", "tertiary-fixed-dim": "#b7c6ee", "inverse-surface": "#273044", "primary-container": "#101c36", "on-secondary-fixed": "#271900", "surface-dim": "#d0daf4", "main-bg": "#F5F7FA", "primary-fixed": "#d9e2ff", "inverse-on-surface": "#edf0ff", "on-tertiary-fixed-variant": "#374668", "surface-container-low": "#f1f3ff", "deep-navy": "#0B1428", "error": "#ba1a1a", "surface-container-high": "#e0e8ff", "text-primary": "#182235", "primary-fixed-dim": "#bbc6e8", "surface-bright": "#f9f9ff", "light-gold": "#E4CC96", "secondary-fixed": "#ffdea5", "tertiary-fixed": "#d8e2ff", "outline": "#75777e", "secondary-container": "#fed489", "on-surface-variant": "#45464d", "on-secondary-fixed-variant": "#5d4202", "on-background": "#111b2e", "on-tertiary-fixed": "#091b3a", "success": "#16865B", "secondary": "#775a1a", "on-primary": "#ffffff", "surface": "#FFFFFF", "secondary-fixed-dim": "#e9c178", "on-primary-fixed-variant": "#3b4663", "surface-container-lowest": "#ffffff", "error-container": "#ffdad6", "tertiary": "#00020b", "on-tertiary": "#ffffff", "background": "#f9f9ff", "information": "#3977C5", "surface-container": "#e8edff", "on-error": "#ffffff", "on-primary-container": "#7984a4", "danger": "#D94B4B", "on-secondary-container": "#785a1b", "surface-container-highest": "#d8e2fc", "on-tertiary-container": "#7585aa", "outline-variant": "#c6c6ce", "surface-tint": "#535e7b", "tertiary-container": "#0a1c3b", "on-secondary": "#ffffff", "surface-variant": "#d8e2fc", "on-primary-fixed": "#0f1b35", "on-surface": "#111b2e", "text-secondary": "#64748B", "inverse-primary": "#bbc6e8", "on-error-container": "#93000a", "warning": "#D99527", "border-subtle": "#E5E9F0" }, borderRadius: { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, spacing: { "space-xl": "1.5rem", "margin-mobile": "1rem", "space-md": "0.75rem", "space-xs": "0.25rem", "margin": "1.5rem", "space-sm": "0.5rem", "space-2xs": "0.125rem", "space-lg": "1rem", "space-3xl": "3rem", "gutter-compact": "0.5rem", "gutter": "1rem", "space-2xl": "2rem" }, fontFamily: { "label-lg": ["Inter"], "display-lg-mobile": ["Plus Jakarta Sans"], "body-md": ["Inter"], "body-lg": ["Inter"], "label-md": ["Inter"], "mono-metric": ["Inter"], "body-sm": ["Inter"], "headline-lg": ["Plus Jakarta Sans"], "headline-lg-mobile": ["Plus Jakarta Sans"], "label-sm": ["Inter"], "headline-sm": ["Plus Jakarta Sans"], "display-lg": ["Plus Jakarta Sans"], "headline-md": ["Plus Jakarta Sans"] }, fontSize: { "label-lg": ["13px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" }], "display-lg-mobile": ["32px", { "lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700" }], "body-md": ["13px", { "lineHeight": "18px", "letterSpacing": "0em", "fontWeight": "400" }], "body-lg": ["15px", { "lineHeight": "22px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-md": ["11px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "600" }], "mono-metric": ["14px", { "lineHeight": "18px", "letterSpacing": "-0.01em", "fontWeight": "500" }], "body-sm": ["12px", { "lineHeight": "16px", "letterSpacing": "0.005em", "fontWeight": "400" }], "headline-lg": ["28px", { "lineHeight": "36px", "letterSpacing": "-0.02em", "fontWeight": "600" }], "headline-lg-mobile": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" }], "label-sm": ["10px", { "lineHeight": "12px", "letterSpacing": "0.04em", "fontWeight": "600" }], "headline-sm": ["16px", { "lineHeight": "24px", "letterSpacing": "-0.005em", "fontWeight": "600" }], "display-lg": ["44px", { "lineHeight": "52px", "letterSpacing": "-0.03em", "fontWeight": "700" }], "headline-md": ["20px", { "lineHeight": "28px", "letterSpacing": "-0.01em", "fontWeight": "600" }] } } } }</script><style>@layer base{html,body{width:100vw;margin:0;padding:0;background-color:#F5F7FA;}body{overscroll-behavior:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}}::-webkit-scrollbar{display:none;}</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-main-bg text-on-surface flex flex-col min-h-screen"><header class="fixed top-0 w-full z-50 pt-safe bg-surface/90 backdrop-blur-xl shadow-[0_1px_8px_rgba(11,20,40,0.04)]"><div class="h-16 px-margin-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0 flex-1"><div class="h-8 flex items-center justify-center flex-shrink-0"><img alt="HBX Solar Logo" class="h-7 w-auto object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDMNjVlN08-z5H_Rp2NwHqSz6fOmOQ89YZccq2VGa2VKWYRb7-CYsmVw0xkb180yFBs-xIcZ52xSDw_RT3LAa1R9RyOhJeyU5DUo7zcyAqs97b9N69e-kpUmcuygtFBfmpiYT9iNshWmIdb7kQm072CfzZyKvtoGxKfhnLVaYFLKmskPkIiGX_wBmDMCPYFW4Nk8MYlrZ2ToGDUl487kCClCethDiuItAgCfkAIXI1vhdWn513OFQh1"></div><div class="flex flex-col min-w-0"><div class="flex items-center gap-space-xs"><span class="font-headline-sm text-headline-sm text-primary-container truncate font-bold">HBX SOLAR ONE</span></div><div class="flex items-center gap-space-xs"><span class="material-symbols-outlined text-text-secondary text-[13px]">location_on</span><span class="font-label-sm text-label-sm text-text-secondary tracking-wide uppercase truncate">Azamgarh, UP</span><span class="inline-flex items-center gap-1 ml-1 px-1.5 py-0.5 rounded-full bg-surface-container text-success font-label-sm text-[9px]"><span class="w-1.5 h-1.5 rounded-full bg-success animate-pulse"></span>Online</span></div></div></div><div class="flex items-center gap-space-xs flex-shrink-0"><button aria-label="Notifications" class="relative w-11 h-11 flex items-center justify-center rounded-full text-primary-container hover:bg-surface-container-high transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span><span class="absolute top-2.5 right-2.5 w-2 h-2 rounded-full bg-warning"></span></button><div class="relative flex items-center justify-center p-0.5 rounded-full ring-1 ring-light-gold"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvgJ5GLGYRNho-HW_LGF7944u5yJnSaE2dph78OCmR9Fmjg2YZxKAQmYpAz1RoaHO9ghYhK-VvYyi9wGQNIPD8GRm3F0_bm5QuH_w-P5XfQAe6mS51PAgTPU0HjDU63STjLjEXyOKfHFhQy5JKucj04UhTu1gvrGGkq-z_y3vhyrCrFHI_IofhXd8XFQoZPwbwxwiGgKI2ThiyE_t093faR-s8zhInReFVgIQZM7I"></div></div></div></header><main class="flex-1 flex flex-col relative w-full pt-16 pb-20 bg-main-bg"><div class="flex flex-col w-full px-margin-mobile pb-space-xl gap-space-md">
+<!-- Real-Time Telemetry & Shift Header Card -->
+<div class="relative overflow-hidden rounded-xl bg-deep-navy text-on-primary p-space-lg shadow-md">
+<!-- Ambient Solar Grid Background Motif -->
+<div class="absolute -right-8 -top-8 w-44 h-44 rounded-full bg-light-gold/10 blur-2xl pointer-events-none"></div>
+<div class="absolute right-3 bottom-2 opacity-5 pointer-events-none select-none">
+<span class="material-symbols-outlined text-[100px] text-surface">share_location</span>
+</div>
+<div class="relative z-10 flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-white/10 backdrop-blur-md text-light-gold font-label-sm text-label-sm">
+<span class="w-1.5 h-1.5 rounded-full bg-light-gold animate-ping"></span>
+          REAL-TIME TELEMETRY
+        </span>
+<span class="font-mono-metric text-mono-metric text-white/70">SYNC: 100%</span>
+</div>
+<div class="mt-space-xs flex items-baseline gap-space-sm">
+<h1 class="font-display-lg-mobile text-display-lg-mobile tracking-tight text-white font-bold" id="live-clock">08:51:59 <span class="font-headline-sm text-headline-sm text-light-gold font-medium">AM</span></h1>
+</div>
+<div class="flex items-center justify-between text-white/80 font-body-sm text-body-sm">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-[16px] text-light-gold">calendar_today</span>
+<span class="">Thursday, 12 Nov 2026</span>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface/15 text-white font-label-md text-label-md">Shift In-Progress</span>
+</div>
+<div class="mt-space-xs pt-space-xs flex items-center justify-between bg-white/5 rounded-lg px-2.5 py-1.5">
+<div class="flex items-center gap-1.5 text-white/90">
+<span class="material-symbols-outlined text-[15px] text-light-gold">schedule</span>
+<span class="font-label-md text-label-md">General Field Shift</span>
+</div>
+<span class="font-mono-metric text-mono-metric text-light-gold text-right">08:30 AM – 05:30 PM</span>
+</div>
+</div>
+</div>
+<!-- Live Geofence Status Banner -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col gap-space-xs">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-success"></span>
+</span>
+<span class="font-headline-sm text-headline-sm text-success font-semibold">Inside Configured Geofence</span>
+</div>
+<span class="material-symbols-outlined text-success text-[20px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+</div>
+<p class="font-body-md text-body-md text-text-primary font-medium">
+      HBX Azamgarh District Operational Center, Civil Lines
+    </p>
+<!-- Metrics Matrix Strip -->
+<div class="grid grid-cols-2 gap-space-xs mt-space-2xs">
+<div class="bg-surface-container-low rounded-lg p-2 flex flex-col">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Satellite Precision</span>
+<span class="font-mono-metric text-mono-metric text-text-primary mt-0.5 font-semibold">±4.2 metres</span>
+<span class="font-label-sm text-label-sm text-success mt-0.5">High Precision Lock</span>
+</div>
+<div class="bg-surface-container-low rounded-lg p-2 flex flex-col">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Centroid Proximity</span>
+<span class="font-mono-metric text-mono-metric text-text-primary mt-0.5 font-semibold">12m from hub center</span>
+<span class="font-label-sm text-label-sm text-text-secondary mt-0.5">Permitted radius: 150m</span>
+</div>
+</div>
+</div>
+<!-- Interactive Mini Geo-Map Card -->
+<div class="bg-surface rounded-xl overflow-hidden shadow-sm flex flex-col">
+<div class="px-space-md py-space-sm flex items-center justify-between bg-surface-container-low">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-text-primary text-[18px]">satellite_alt</span>
+<span class="font-label-lg text-label-lg text-text-primary">Azamgarh Hub Perimeter Telemetry</span>
+</div>
+<div class="flex items-center gap-1 text-text-secondary">
+<span class="material-symbols-outlined text-[14px]">history</span>
+<span class="font-label-sm text-label-sm" id="fix-timestamp">295s ago</span>
+</div>
+</div>
+<div class="relative w-full h-52 bg-deep-navy overflow-hidden">
+<!-- Simulated Vector GIS Layer -->
+<svg class="absolute inset-0 w-full h-full opacity-35" xmlns="http://www.w3.org/2000/svg">
+<defs>
+<pattern height="24" id="gisGrid" patternUnits="userSpaceOnUse" width="24">
+<path d="M 24 0 L 0 0 0 24" fill="none" stroke="#E5E9F0" stroke-width="0.5"></path>
+</pattern>
+</defs>
+<rect fill="url(#gisGrid)" height="100%" width="100%"></rect>
+<!-- Road / Sector Lines -->
+<path d="M -20,80 Q 120,60 220,110 T 450,140" fill="none" stroke="#75777e" stroke-width="2"></path>
+<path d="M 180,-10 L 210,230" fill="none" stroke="#75777e" stroke-dasharray="3 3" stroke-width="1.5"></path>
+<path d="M 60,220 L 320,-10" fill="none" stroke="#75777e" stroke-width="1.5"></path>
+</svg>
+<!-- Geofence 150m Circular Boundary -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full bg-success/15 flex items-center justify-center pointer-events-none">
+<div class="w-full h-full rounded-full bg-success/10 animate-ping opacity-30"></div>
+</div>
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-40 h-40 rounded-full shadow-[0_0_15px_rgba(22,134,91,0.35)] flex items-center justify-center pointer-events-none">
+<div class="w-32 h-32 rounded-full bg-success/5 flex items-center justify-center">
+<span class="font-label-sm text-[9px] text-white/70 uppercase tracking-widest bg-deep-navy/80 px-1.5 py-0.5 rounded">R=150m Perimeter</span>
+</div>
+</div>
+<!-- Hub Centroid -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center">
+<span class="material-symbols-outlined text-light-gold text-[20px] drop-shadow">domain</span>
+</div>
+<!-- Live User Location Beacon (12m offset) -->
+<div class="absolute top-[46%] left-[54%] flex flex-col items-center cursor-pointer group">
+<span class="relative flex h-4 w-4">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-information opacity-80"></span>
+<span class="relative inline-flex rounded-full h-4 w-4 bg-information shadow-[0_0_10px_#3977C5]"></span>
+</span>
+<div class="mt-1 px-1.5 py-0.5 rounded bg-surface text-deep-navy shadow-sm font-label-sm text-[9px] font-bold whitespace-nowrap flex items-center gap-1">
+<span class="w-1 h-1 rounded-full bg-success"></span>YOU (±4.2m)
+        </div>
+</div>
+<!-- Map HUD Controls Overlay -->
+<div class="absolute bottom-2 left-2 flex items-center gap-1.5 bg-deep-navy/90 backdrop-blur-md px-2 py-1 rounded text-white font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[14px] text-success">gps_fixed</span>
+<span class="">26.0734° N, 83.1859° E</span>
+</div>
+<button aria-label="Recenter map" class="absolute bottom-2 right-2 w-8 h-8 rounded bg-surface/90 text-primary-container flex items-center justify-center shadow hover:bg-surface active:scale-95 transition-all" id="re-center-btn">
+<span class="material-symbols-outlined text-[18px]">my_location</span>
+</button>
+</div>
+<!-- Footnote Verification Bar -->
+<div class="px-space-md py-2 flex items-center justify-between text-text-secondary bg-surface">
+<span class="font-body-sm text-body-sm">Azamgarh Civil Lines Hub Polygon</span>
+<span class="font-label-md text-label-md text-success flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">lock</span>
+        Biometric + Cryptographic Tag
+      </span>
+</div>
+</div>
+<!-- Primary Shift Action Matrix -->
+<div class="flex flex-col gap-space-sm">
+<!-- Active Clocked-in Status Button -->
+<button class="w-full h-12 bg-primary-container text-white rounded-lg flex items-center justify-between px-space-md active:bg-deep-navy transition-all shadow-sm">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-success"></span>
+<span class="font-headline-sm text-headline-sm font-semibold">Clocked In &amp; Verified</span>
+</div>
+<div class="flex items-center gap-1 bg-white/10 px-2.5 py-1 rounded font-mono-metric text-mono-metric text-light-gold">
+<span class="material-symbols-outlined text-[14px]">timelapse</span>
+<span id="active-duration" class="">0h 21m 59s active</span>
+</div>
+</button>
+<!-- Quick Action Dual Grid -->
+<div class="grid grid-cols-2 gap-space-sm">
+<button class="h-11 rounded-lg bg-surface hover:bg-surface-container-low text-text-primary flex items-center justify-center gap-2 px-space-sm shadow-sm active:scale-[0.98] transition-all" id="break-btn">
+<span class="material-symbols-outlined text-warning text-[20px]">coffee</span>
+<span class="font-label-lg text-label-lg font-medium">Start Field Break</span>
+</button>
+<button class="h-11 rounded-lg bg-surface hover:bg-surface-container-low text-text-primary flex items-center justify-center gap-2 px-space-sm shadow-sm active:scale-[0.98] transition-all" id="field-visit-btn">
+<span class="material-symbols-outlined text-information text-[20px]">add_location_alt</span>
+<span class="font-label-lg text-label-lg font-medium">Register Visit</span>
+</button>
+</div>
+<!-- Clock Out Warning Action -->
+<button class="w-full h-10 rounded-lg bg-surface-container-low hover:bg-error-container text-danger flex items-center justify-center gap-2 transition-colors active:scale-[0.99]" id="clock-out-btn">
+<span class="material-symbols-outlined text-[18px]">logout</span>
+<span class="font-label-lg text-label-lg font-semibold">Clock Out Shift</span>
+</button>
+</div>
+<!-- Today's Field Attendance Summary -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between pb-space-xs">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Today's Shift Log</span>
+<span class="px-2 py-0.5 rounded-full bg-success/15 text-success font-label-sm text-label-sm uppercase">Compliant</span>
+</div>
+<div class="grid grid-cols-3 gap-2 py-1">
+<div class="flex flex-col bg-surface-container-low rounded-lg p-2">
+<span class="font-label-sm text-label-sm text-text-secondary">Ingress Time</span>
+<span class="font-mono-metric text-mono-metric text-text-primary mt-1 font-semibold">08:30 AM</span>
+<span class="font-label-sm text-label-sm text-success mt-0.5">On-time (Geo)</span>
+</div>
+<div class="flex flex-col bg-surface-container-low rounded-lg p-2">
+<span class="font-label-sm text-label-sm text-text-secondary">Planned Egress</span>
+<span class="font-mono-metric text-mono-metric text-text-primary mt-1 font-semibold">05:30 PM</span>
+<span class="font-label-sm text-label-sm text-text-secondary mt-0.5">9h 00m standard</span>
+</div>
+<div class="flex flex-col bg-surface-container-low rounded-lg p-2">
+<span class="font-label-sm text-label-sm text-text-secondary">Break Duration</span>
+<span class="font-mono-metric text-mono-metric text-text-primary mt-1 font-semibold">00:00</span>
+<span class="font-label-sm text-label-sm text-text-secondary mt-0.5">60m quota</span>
+</div>
+</div>
+<!-- Active Field Sector Allocation -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center justify-between">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-primary-container text-light-gold flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-[16px]">grid_view</span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="font-label-sm text-label-sm text-text-secondary uppercase">Assigned Operational Sector</span>
+<span class="font-body-md text-body-md text-text-primary font-medium truncate">Bilariyaganj &amp; Sagri Sectors</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-text-secondary text-[18px]">chevron_right</span>
+</div>
+</div>
+<!-- Weekly Attendance Log Strip -->
+<div class="bg-surface rounded-xl p-space-md shadow-sm flex flex-col gap-space-sm">
+<div class="flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-text-primary font-semibold">Weekly Attendance</span>
+<span class="font-body-sm text-body-sm text-text-secondary">W46 • Current Roster</span>
+</div>
+<button class="text-primary-container font-label-md text-label-md flex items-center gap-0.5 hover:underline">
+        Monthly Log
+        <span class="material-symbols-outlined text-[14px]">arrow_forward</span>
+</button>
+</div>
+<!-- Mini Calendar Week Strips -->
+<div class="grid grid-cols-6 gap-1.5 pt-1">
+<!-- Mon -->
+<div class="flex flex-col items-center justify-center py-2 rounded-lg bg-surface-container-low gap-1">
+<span class="font-label-sm text-label-sm text-text-secondary">M</span>
+<span class="font-mono-metric text-mono-metric text-text-primary font-bold">09</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<!-- Tue -->
+<div class="flex flex-col items-center justify-center py-2 rounded-lg bg-surface-container-low gap-1">
+<span class="font-label-sm text-label-sm text-text-secondary">T</span>
+<span class="font-mono-metric text-mono-metric text-text-primary font-bold">10</span>
+<span class="w-2 h-2 rounded-full bg-success"></span>
+</div>
+<!-- Wed -->
+<div class="flex flex-col items-center justify-center py-2 rounded-lg bg-surface-container-low gap-1">
+<span class="font-label-sm text-label-sm text-text-secondary">W</span>
+<span class="font-mono-metric text-mono-metric text-text-primary font-bold">11</span>
+<span class="w-2 h-2 rounded-full bg-information"></span>
+</div>
+<!-- Thu (Today) -->
+<div class="flex flex-col items-center justify-center py-2 rounded-lg bg-primary-container text-white gap-1 shadow-sm">
+<span class="font-label-sm text-label-sm text-light-gold">T</span>
+<span class="font-mono-metric text-mono-metric text-white font-bold">12</span>
+<span class="w-2 h-2 rounded-full bg-light-gold animate-pulse"></span>
+</div>
+<!-- Fri -->
+<div class="flex flex-col items-center justify-center py-2 rounded-lg bg-surface-container-low opacity-60 gap-1">
+<span class="font-label-sm text-label-sm text-text-secondary">F</span>
+<span class="font-mono-metric text-mono-metric text-text-secondary">13</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+</div>
+<!-- Sat -->
+<div class="flex flex-col items-center justify-center py-2 rounded-lg bg-surface-container-low opacity-60 gap-1">
+<span class="font-label-sm text-label-sm text-text-secondary">S</span>
+<span class="font-mono-metric text-mono-metric text-text-secondary">14</span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span>
+</div>
+</div>
+<!-- Attendance Legend -->
+<div class="flex items-center justify-between px-1 text-text-secondary font-label-sm text-label-sm pt-1">
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-success"></span>
+<span class="">Present (3)</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-information"></span>
+<span class="">Field Tour (1)</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="w-2 h-2 rounded-full bg-danger"></span>
+<span class="">Absent (0)</span>
+</div>
+</div>
+<!-- Correction Action Tile -->
+<div class="mt-1 pt-space-xs flex items-center justify-between bg-surface-container-low rounded-lg p-2.5">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-warning text-[20px]">edit_calendar</span>
+<span class="font-body-sm text-body-sm text-text-primary">Need an attendance correction?</span>
+</div>
+<button class="px-2.5 py-1 rounded bg-surface hover:bg-white text-text-primary font-label-md text-label-md shadow-sm active:scale-95 transition-all">
+        Raise Request
+      </button>
+</div>
+</div>
+<!-- Diagnostic & Transparency Strip -->
+<div class="bg-surface-container-low rounded-xl p-space-md flex items-start gap-space-sm">
+<span class="material-symbols-outlined text-information text-[20px] flex-shrink-0 mt-0.5">verified_user</span>
+<div class="flex flex-col gap-0.5">
+<span class="font-label-md text-label-md text-text-primary font-semibold">Supporting Signal Notice</span>
+<p class="font-body-sm text-body-sm text-text-secondary leading-relaxed">
+        Location accuracy validated by dual-frequency hardware GPS sensor. Cellular triangulation and WiFi fallback actively secured under HBX Trust Layer.
+      </p>
+</div>
+</div>
+<!-- Interactive Feedback Modal / Toast Slot (Hidden by Default) -->
+<div class="fixed bottom-24 left-4 right-4 z-40 transform translate-y-32 transition-transform duration-300 pointer-events-none flex justify-center" id="action-toast">
+<div class="bg-deep-navy text-white px-4 py-2.5 rounded-lg shadow-xl flex items-center gap-2.5 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-success text-[18px]">check_circle</span>
+<span id="toast-message" class="">Geotag logged successfully.</span>
+</div>
+</div>
+</div>
+<script>
+  (function () {
+    // Live Clock Simulation
+    let seconds = 12;
+    let minutes = 47;
+    let hours = 8;
+    let shiftSecs = 12;
+    let shiftMins = 17;
+    let shiftHours = 0;
+
+    const clockEl = document.getElementById('live-clock');
+    const durationEl = document.getElementById('active-duration');
+    const fixEl = document.getElementById('fix-timestamp');
+
+    let secondsSinceFix = 12;
+
+    setInterval(() => {
+      seconds++;
+      shiftSecs++;
+      secondsSinceFix++;
+
+      if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+          minutes = 0;
+          hours = (hours % 12) + 1;
+        }
+      }
+
+      if (shiftSecs >= 60) {
+        shiftSecs = 0;
+        shiftMins++;
+        if (shiftMins >= 60) {
+          shiftMins = 0;
+          shiftHours++;
+        }
+      }
+
+      const pad = (n) => String(n).padStart(2, '0');
+      if (clockEl) {
+        clockEl.innerHTML = `${pad(hours)}:${pad(minutes)}:${pad(seconds)} <span class="font-headline-sm text-headline-sm text-light-gold font-medium">AM</span>`;
+      }
+
+      if (durationEl) {
+        durationEl.innerText = `${shiftHours}h ${shiftMins}m ${shiftSecs}s active`;
+      }
+
+      if (fixEl && secondsSinceFix % 5 === 0) {
+        fixEl.innerText = `${secondsSinceFix}s ago`;
+      }
+    }, 1000);
+
+    // Toast Utility
+    const toast = document.getElementById('action-toast');
+    const toastMsg = document.getElementById('toast-message');
+
+    function showToast(msg) {
+      if (!toast || !toastMsg) return;
+      toastMsg.innerText = msg;
+      toast.classList.remove('translate-y-32', 'pointer-events-none');
+      setTimeout(() => {
+        toast.classList.add('translate-y-32', 'pointer-events-none');
+      }, 2600);
+    }
+
+    const breakBtn = document.getElementById('break-btn');
+    if (breakBtn) {
+      breakBtn.addEventListener('click', () => {
+        showToast('Field Break initiated (Duration limit: 60m)');
+      });
+    }
+
+    const fieldVisitBtn = document.getElementById('field-visit-btn');
+    if (fieldVisitBtn) {
+      fieldVisitBtn.addEventListener('click', () => {
+        showToast('Acquiring high-res geocache for client meeting...');
+      });
+    }
+
+    const clockOutBtn = document.getElementById('clock-out-btn');
+    if (clockOutBtn) {
+      clockOutBtn.addEventListener('click', () => {
+        showToast('Shift Egress requires supervisor authorization check.');
+      });
+    }
+
+    const recenterBtn = document.getElementById('re-center-btn');
+    if (recenterBtn) {
+      recenterBtn.addEventListener('click', () => {
+        secondsSinceFix = 1;
+        if (fixEl) fixEl.innerText = 'Just now (1s ago)';
+        showToast('Centroid aligned: Lat 26.0734° N, Lon 83.1859° E');
+      });
+    }
+  })();
+</script></main><nav class="fixed bottom-0 w-full z-50 pb-safe bg-surface/95 backdrop-blur-xl shadow-[0_-2px_12px_rgba(11,20,40,0.06)]" data-active-classes="[&amp;_[data-indicator]]:bg-secondary-container/40 [&amp;_[data-indicator]]:text-primary-container [&amp;_[data-icon]]:text-primary-container [&amp;_[data-label]]:text-primary-container [&amp;_[data-label]]:font-semibold"><div class="h-16 flex items-center justify-around px-gutter-compact"><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="dashboard" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">solar_power</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Home</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="crm" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">groups</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Customers</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="field-operations" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">assignment_turned_in</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Tasks</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="solar-installations" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">precision_manufacturing</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Projects</span></a><a class="group flex flex-col items-center justify-center flex-1 py-1 text-text-secondary hover:text-primary transition-colors min-h-[44px]" data-path="employee-settings" href="#"><div class="flex items-center justify-center w-12 h-7 rounded-full transition-all text-text-secondary" data-indicator=""><span class="material-symbols-outlined text-[20px]" data-icon="">badge</span></div><span class="font-label-sm text-label-sm mt-0.5 tracking-tight text-center" data-label="">Profile</span></a></div></nav>
+
+
+</body></html>

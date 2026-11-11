@@ -1,0 +1,6 @@
+{
+  "name": "HBX Solar One",
+  "description": "Enterprise operating system for solar energy deployments, CRM, 23-stage project pipeline, geofenced workforce operations and financial DBT tracking.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

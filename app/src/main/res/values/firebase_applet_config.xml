@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <string name="firestore_database_id" translatable="false">ai-studio-android-hbxsolar-95deda1e-af92-4241-b763-79f9a656d324</string>
+    <string name="recaptcha_site_key" translatable="false">6LemxhouAAAAAEWve4fSVFRZRGS4_t1Qh017l4wg</string>
+</resources>
