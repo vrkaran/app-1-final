@@ -23,6 +23,19 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
+  flavorDimensions += "environment"
+  productFlavors {
+    create("staging") {
+      dimension = "environment"
+      applicationIdSuffix = ".staging"
+      manifestPlaceholders["appLabel"] = "HBX Solar (Staging)"
+    }
+    create("production") {
+      dimension = "environment"
+      manifestPlaceholders["appLabel"] = "HBX Solar"
+    }
+  }
+
   // Do not remove or modify these signingConfigs. They are necessary for building, installing,
   // and updating Android apps in AI Studio.
   signingConfigs {
@@ -130,6 +143,8 @@ dependencies {
   implementation(libs.okhttp)
   // implementation(libs.play.services.location)
   implementation(libs.retrofit)
+  implementation(libs.androidx.work.runtime.ktx)
+  testImplementation(libs.androidx.work.testing)
   testImplementation(libs.androidx.compose.ui.test.junit4)
   testImplementation(libs.androidx.core)
   testImplementation(libs.androidx.junit)
@@ -146,3 +161,22 @@ dependencies {
   "ksp"(libs.androidx.room.compiler)
   "ksp"(libs.moshi.kotlin.codegen)
 }
+
+// AI Studio Preview Compatibility: Copies the compiled stagingDebug APK to the default
+// app/build/outputs/apk/debug/app-debug.apk location expected by the streaming emulator runner.
+tasks.register<Copy>("copyStagingApkForAiStudioPreview") {
+  from(layout.buildDirectory.file("outputs/apk/staging/debug/app-staging-debug.apk"))
+  into(layout.buildDirectory.dir("outputs/apk/debug"))
+  rename { "app-debug.apk" }
+}
+
+tasks.matching { it.name == "assembleStagingDebug" }.configureEach {
+  finalizedBy("copyStagingApkForAiStudioPreview")
+}
+
+// Disambiguate testDebugUnitTest task for automated tools
+tasks.register("testDebugUnitTest") {
+  dependsOn("testStagingDebugUnitTest")
+  description = "Runs unit tests across debug variants"
+}
+

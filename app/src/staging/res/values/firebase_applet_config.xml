@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<resources>
+    <!-- Staging Firestore Database defaults to (default) -->
+    <string name="firestore_database_id" translatable="false">(default)</string>
+    <!-- Staging reCAPTCHA Enterprise key: must be provisioned in Google Cloud project hbx-solar-staging -->
+    <string name="recaptcha_site_key" translatable="false"></string>
+</resources>

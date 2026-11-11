@@ -120,8 +120,14 @@ interface DocumentDao {
     @Query("SELECT * FROM documents WHERE documentId = :id")
     suspend fun getDocumentById(id: String): DocumentEntity?
 
+    @Query("SELECT * FROM documents WHERE parentEntityType = :parentType AND parentEntityId = :parentId AND isDeleted = 0 ORDER BY uploadedAt DESC")
+    suspend fun getDocumentsForParent(parentType: String, parentId: String): List<DocumentEntity>
+
     @Query("SELECT * FROM documents WHERE uploadStatus IN ('QUEUED', 'LOCAL_ONLY', 'FAILED', 'RETRY_PENDING', 'METADATA_PENDING') AND isDeleted = 0")
     suspend fun getPendingUploadDocuments(): List<DocumentEntity>
+
+    @Query("SELECT * FROM documents WHERE uploadStatus IN ('QUEUED', 'LOCAL_ONLY', 'FAILED', 'RETRY_PENDING', 'METADATA_PENDING') AND isDeleted = 0")
+    suspend fun getPendingUploads(): List<DocumentEntity>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun upsertDocument(document: DocumentEntity)

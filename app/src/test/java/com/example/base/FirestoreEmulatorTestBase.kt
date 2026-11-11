@@ -88,7 +88,12 @@ abstract class FirestoreEmulatorTestBase {
             } catch (unused: FirebaseAuthInvalidUserException) {
                 auth.createUserWithEmailAndPassword(email, DEFAULT_PASSWORD).await()
             }
-            checkNotNull(result.user?.uid) { "User auth failed" }
+            val user = checkNotNull(result.user) { "User auth failed" }
+            user.getIdToken(true).await()
+            withContext(Dispatchers.Main) {
+                org.robolectric.shadows.ShadowLooper.idleMainLooper()
+            }
+            user.uid
         }
     }
 

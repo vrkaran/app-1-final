@@ -135,7 +135,7 @@ fun DocumentViewerModal(
                             }
 
                             AsyncImage(
-                                model = document.downloadUrl ?: document.localFilePath ?: document.thumbnailPath,
+                                model = document.localFilePath ?: document.downloadUrl ?: document.thumbnailPath,
                                 contentDescription = document.originalFileName,
                                 contentScale = ContentScale.Fit,
                                 modifier = Modifier

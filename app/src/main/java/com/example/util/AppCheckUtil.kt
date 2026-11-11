@@ -44,14 +44,16 @@ fun configureAppCheck(context: Context, intent: Intent?) {
             Log.d(TAG, "DebugAppCheckProviderFactory installed.")
         } else {
             val resId = context.resources.getIdentifier(RECAPTCHA_SITE_KEY_RES, "string", context.packageName)
-            if (resId != 0) {
-                val siteKey = context.getString(resId)
-                if (siteKey.isNotBlank()) {
-                    FirebaseAppCheck.getInstance().installAppCheckProviderFactory(
-                        DebugAppCheckProviderFactory.getInstance()
-                    )
-                    Log.d(TAG, "AppCheck provider factory installed.")
-                }
+            val siteKey = if (resId != 0) context.getString(resId).trim() else ""
+            if (siteKey.isNotBlank()) {
+                FirebaseAppCheck.getInstance().installAppCheckProviderFactory(
+                    RecaptchaAppCheckProviderFactory.getInstance(siteKey)
+                )
+                Log.d(TAG, "RecaptchaAppCheckProviderFactory installed for release variant.")
+            } else {
+                val errMsg = "FATAL: App Check reCAPTCHA site key is missing in release build ($RECAPTCHA_SITE_KEY_RES). Release deployment requires valid reCAPTCHA configuration."
+                Log.e(TAG, errMsg)
+                throw IllegalStateException(errMsg)
             }
         }
     } catch (e: Exception) {

@@ -101,7 +101,7 @@ class DocumentRepository(
             FileProcessingUtil.generateThumbnail(context, finalFile)
         } else null
 
-        val checksum = FileProcessingUtil.calculateMD5Checksum(finalFile)
+        val checksum = FileProcessingUtil.calculateSHA256Checksum(finalFile) ?: FileProcessingUtil.calculateMD5Checksum(finalFile)
         val storagePath = StoragePathBuilder.buildPath(
             parentType = parentEntityType,
             parentId = parentEntityId,
@@ -110,6 +110,11 @@ class DocumentRepository(
         )
 
         val now = System.currentTimeMillis()
+
+        // Compute incremental version for this parent and category
+        val existingDocs = database.documentDao().getDocumentsForParent(parentEntityType, parentEntityId)
+        val highestVersion = existingDocs.filter { it.documentCategory == category.name }.maxOfOrNull { it.version } ?: 0
+        val nextVersion = highestVersion + 1
 
         // 3. Create Room entity in QUEUED status
         val entity = DocumentEntity(
@@ -137,7 +142,7 @@ class DocumentRepository(
             thumbnailPath = thumbnailPath,
             description = description,
             isDeleted = false,
-            version = 1,
+            version = nextVersion,
             downloadUrl = null
         )
 
@@ -185,7 +190,14 @@ class DocumentRepository(
         )
         database.syncQueueDao().enqueue(syncOp)
 
-        // 6. Attempt immediate execution if possible
+        // 6. Enqueue persistent WorkManager job for process-death and reboot survival
+        try {
+            com.example.data.sync.DocumentUploadWorker.enqueueImmediate(context)
+        } catch (e: Exception) {
+            Log.w(TAG, "WorkManager enqueue deferred: ${e.message}")
+        }
+
+        // 7. Attempt immediate execution if possible
         try {
             uploadDocumentDirect(documentId, finalFile, storagePath, mimeType, entity, userProfile, onProgress)
         } catch (e: Exception) {

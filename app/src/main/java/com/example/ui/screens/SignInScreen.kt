@@ -1,5 +1,6 @@
 package com.example.ui.screens
 
+import android.app.Activity
 import android.content.Context
 import android.util.Log
 import androidx.compose.animation.*
@@ -36,10 +37,13 @@ import androidx.credentials.exceptions.GetCredentialCancellationException
 import com.example.BuildConfig
 import com.example.R
 import com.example.data.AuthRepository
+import com.example.data.PhoneVerificationEvent
 import com.example.model.UserRole
 import com.example.ui.theme.*
 import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
+import com.google.firebase.auth.PhoneAuthProvider
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 private const val TAG = "SignInScreen"
@@ -54,13 +58,24 @@ fun SignInScreen(
     val scope = rememberCoroutineScope()
 
     var isSigningIn by remember { mutableStateOf(false) }
+    var isSendingOtp by remember { mutableStateOf(false) }
     var errorMessage by remember { mutableStateOf<String?>(null) }
-    var activeTab by remember { mutableStateOf("GOOGLE") } // GOOGLE, PHONE, DEV
+    var infoMessage by remember { mutableStateOf<String?>(null) }
 
     // Phone Auth inputs
-    var phoneNumber by remember { mutableStateOf("9839144210") }
+    var phoneNumber by remember { mutableStateOf("") }
     var otpCode by remember { mutableStateOf("") }
-    var otpSent by remember { mutableStateOf(false) }
+    var verificationId by remember { mutableStateOf<String?>(null) }
+    var resendToken by remember { mutableStateOf<PhoneAuthProvider.ForceResendingToken?>(null) }
+    var resendCooldown by remember { mutableIntStateOf(0) }
+
+    // Resend countdown timer
+    LaunchedEffect(resendCooldown) {
+        if (resendCooldown > 0) {
+            delay(1000L)
+            resendCooldown -= 1
+        }
+    }
 
     Box(
         modifier = modifier
@@ -146,11 +161,30 @@ fun SignInScreen(
                         }
                     }
 
+                    // Info Banner if any
+                    infoMessage?.let { info ->
+                        Surface(
+                            shape = RoundedCornerShape(8.dp),
+                            color = StatusSuccess.copy(alpha = 0.1f),
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Row(
+                                modifier = Modifier.padding(10.dp),
+                                verticalAlignment = Alignment.CenterVertically,
+                                horizontalArrangement = Arrangement.spacedBy(8.dp)
+                            ) {
+                                Icon(Icons.Default.CheckCircle, contentDescription = null, tint = StatusSuccess, modifier = Modifier.size(18.dp))
+                                Text(text = info, color = StatusSuccess, fontSize = 12.sp)
+                            }
+                        }
+                    }
+
                     // Primary Google Sign-In Button (Mandated by Firebase Skill)
                     Button(
                         onClick = {
                             isSigningIn = true
                             errorMessage = null
+                            infoMessage = null
                             scope.launch {
                                 try {
                                     val credentialManager = CredentialManager.create(context)
@@ -185,7 +219,7 @@ fun SignInScreen(
                                 }
                             }
                         },
-                        enabled = !isSigningIn,
+                        enabled = !isSigningIn && !isSendingOtp,
                         colors = ButtonDefaults.buttonColors(containerColor = PrimaryNavy),
                         shape = RoundedCornerShape(12.dp),
                         modifier = Modifier
@@ -224,59 +258,209 @@ fun SignInScreen(
                         verticalAlignment = Alignment.CenterVertically
                     ) {
                         HorizontalDivider(modifier = Modifier.weight(1f), color = SurfaceContainerLow)
-                        Text("  ENTERPRISE OTP  ", fontSize = 10.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
+                        Text("  ENTERPRISE OTP (+91)  ", fontSize = 10.sp, color = TextSecondary, fontWeight = FontWeight.Bold)
                         HorizontalDivider(modifier = Modifier.weight(1f), color = SurfaceContainerLow)
                     }
 
                     // Phone Number / Employee OTP Field
                     OutlinedTextField(
                         value = phoneNumber,
-                        onValueChange = { phoneNumber = it },
+                        onValueChange = { input ->
+                            // Digits only, max 10
+                            phoneNumber = input.filter { it.isDigit() }.take(10)
+                        },
                         label = { Text("Mobile Phone (+91)") },
+                        placeholder = { Text("9876543210") },
+                        prefix = { Text("+91 ", fontWeight = FontWeight.Bold, color = PrimaryNavy) },
                         leadingIcon = { Icon(Icons.Default.Phone, contentDescription = null, tint = PrimaryNavy) },
                         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Phone),
                         singleLine = true,
+                        enabled = !isSigningIn && !isSendingOtp && verificationId == null,
                         modifier = Modifier
                             .fillMaxWidth()
                             .testTag("phone_input")
                     )
 
-                    if (otpSent) {
+                    // Step 2: OTP Entry Field (Once SMS has been dispatched)
+                    if (verificationId != null) {
                         OutlinedTextField(
                             value = otpCode,
-                            onValueChange = { otpCode = it },
-                            label = { Text("6-Digit OTP Code") },
+                            onValueChange = { input ->
+                                otpCode = input.filter { it.isDigit() }.take(6)
+                            },
+                            label = { Text("6-Digit SMS OTP Code") },
+                            placeholder = { Text("123456") },
                             leadingIcon = { Icon(Icons.Default.Lock, contentDescription = null, tint = PrimaryNavy) },
                             keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword),
                             singleLine = true,
-                            modifier = Modifier.fillMaxWidth()
+                            enabled = !isSigningIn,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .testTag("otp_input")
                         )
+
+                        // Resend Countdown Row
+                        Row(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            TextButton(
+                                onClick = {
+                                    verificationId = null
+                                    otpCode = ""
+                                    infoMessage = null
+                                    errorMessage = null
+                                }
+                            ) {
+                                Text("Change Number", fontSize = 12.sp, color = TextSecondary)
+                            }
+
+                            TextButton(
+                                onClick = {
+                                    if (resendCooldown == 0 && context is Activity) {
+                                        errorMessage = null
+                                        infoMessage = "Resending OTP code..."
+                                        resendCooldown = 60
+                                        authRepository.sendPhoneOtp(
+                                            activity = context,
+                                            normalizedPhoneNumber = "+91$phoneNumber",
+                                            resendToken = resendToken
+                                        ) { event ->
+                                            when (event) {
+                                                is PhoneVerificationEvent.CodeSent -> {
+                                                    verificationId = event.verificationId
+                                                    resendToken = event.token
+                                                    infoMessage = "SMS code resent to +91 $phoneNumber"
+                                                }
+                                                is PhoneVerificationEvent.Failed -> {
+                                                    errorMessage = event.error
+                                                    infoMessage = null
+                                                    resendCooldown = 0
+                                                }
+                                                else -> {}
+                                            }
+                                        }
+                                    }
+                                },
+                                enabled = resendCooldown == 0 && !isSendingOtp && !isSigningIn
+                            ) {
+                                Text(
+                                    text = if (resendCooldown > 0) "Resend in ${resendCooldown}s" else "Resend OTP",
+                                    fontSize = 12.sp,
+                                    color = if (resendCooldown > 0) TextSecondary else PrimaryNavy,
+                                    fontWeight = FontWeight.Bold
+                                )
+                            }
+                        }
                     }
 
-                    OutlinedButton(
+                    // Action Button (Send OTP or Verify & Sign In)
+                    Button(
                         onClick = {
-                            if (!otpSent) {
-                                otpSent = true
-                                errorMessage = null
+                            errorMessage = null
+                            infoMessage = null
+
+                            if (verificationId == null) {
+                                // Validate 10-digit Indian mobile number
+                                if (phoneNumber.length != 10) {
+                                    errorMessage = "Please enter a valid 10-digit Indian mobile number."
+                                    return@Button
+                                }
+
+                                val activity = context as? Activity
+                                if (activity == null) {
+                                    errorMessage = "Internal error: Activity context not available for phone verification."
+                                    return@Button
+                                }
+
+                                isSendingOtp = true
+                                resendCooldown = 60
+                                val normalizedNumber = "+91$phoneNumber"
+
+                                authRepository.sendPhoneOtp(
+                                    activity = activity,
+                                    normalizedPhoneNumber = normalizedNumber,
+                                    resendToken = resendToken
+                                ) { event ->
+                                    when (event) {
+                                        is PhoneVerificationEvent.Sending -> {
+                                            isSendingOtp = true
+                                        }
+                                        is PhoneVerificationEvent.CodeSent -> {
+                                            isSendingOtp = false
+                                            verificationId = event.verificationId
+                                            resendToken = event.token
+                                            infoMessage = "SMS code sent to +91 $phoneNumber"
+                                        }
+                                        is PhoneVerificationEvent.AutoVerified -> {
+                                            isSendingOtp = false
+                                            // Handle instant auto-retrieval
+                                            scope.launch {
+                                                isSigningIn = true
+                                                val credSms = event.credential.smsCode ?: ""
+                                                val verId = verificationId ?: ""
+                                                if (credSms.isNotBlank() && verId.isNotBlank()) {
+                                                    authRepository.verifyOtpAndSignIn(verId, credSms)
+                                                }
+                                                isSigningIn = false
+                                            }
+                                        }
+                                        is PhoneVerificationEvent.Failed -> {
+                                            isSendingOtp = false
+                                            errorMessage = event.error
+                                            resendCooldown = 0
+                                        }
+                                        is PhoneVerificationEvent.Idle -> {
+                                            isSendingOtp = false
+                                        }
+                                    }
+                                }
                             } else {
+                                // Step 2: Verify 6-digit OTP
+                                if (otpCode.length != 6) {
+                                    errorMessage = "Please enter the complete 6-digit OTP code."
+                                    return@Button
+                                }
+
                                 isSigningIn = true
-                                // Simulated OTP token verification falling back to authenticated state
                                 scope.launch {
-                                    kotlinx.coroutines.delay(600)
+                                    val currentVerId = verificationId ?: return@launch
+                                    val result = authRepository.verifyOtpAndSignIn(currentVerId, otpCode)
                                     isSigningIn = false
-                                    onDevBypassRole(UserRole.BDE)
+                                    if (result.isFailure) {
+                                        errorMessage = result.exceptionOrNull()?.localizedMessage ?: "Invalid or expired OTP code."
+                                    }
                                 }
                             }
                         },
+                        enabled = !isSigningIn && !isSendingOtp,
                         modifier = Modifier
                             .fillMaxWidth()
-                            .height(44.dp),
+                            .height(48.dp)
+                            .testTag("request_or_verify_otp_button"),
+                        colors = ButtonDefaults.buttonColors(containerColor = if (verificationId == null) DeepNavy else StatusSuccess),
                         shape = RoundedCornerShape(10.dp)
                     ) {
-                        Text(if (!otpSent) "Request OTP Code" else "Verify & Sign In", fontWeight = FontWeight.Bold, color = PrimaryNavy)
+                        if (isSendingOtp || isSigningIn) {
+                            CircularProgressIndicator(color = Color.White, strokeWidth = 2.dp, modifier = Modifier.size(20.dp))
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(if (isSendingOtp) "Requesting SMS..." else "Verifying Code...")
+                        } else {
+                            Icon(
+                                imageVector = if (verificationId == null) Icons.Default.Sms else Icons.Default.VerifiedUser,
+                                contentDescription = null,
+                                modifier = Modifier.size(18.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = if (verificationId == null) "Request OTP Code" else "Verify & Access HBX Cloud",
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
                     }
 
-                    // Debug Developer Bypass (Visible in DEBUG builds for previewing all 10 roles)
+                    // Debug Developer Bypass (Visible in DEBUG builds for previewing all 10 roles without consuming SMS quotas)
                     if (BuildConfig.DEBUG) {
                         Spacer(modifier = Modifier.height(4.dp))
                         Surface(

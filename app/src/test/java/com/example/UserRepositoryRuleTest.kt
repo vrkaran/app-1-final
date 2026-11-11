@@ -22,10 +22,11 @@ class UserRepositoryRuleTest : FirestoreEmulatorTestBase() {
         auth.currentUser?.getIdToken(true)?.await()
         org.robolectric.shadows.ShadowLooper.idleMainLooper()
         val repository = FirestoreUserRepository(firestore)
+        val docRef = firestore.collection("users").document(uid)
 
         // Seed profile
-        firestore.collection("users").document(uid).set(
-            mapOf(
+        docRef.set(
+            mapOf<String, Any>(
                 "uid" to uid,
                 "fullName" to "Alice Sharma",
                 "email" to email,
@@ -50,7 +51,7 @@ class UserRepositoryRuleTest : FirestoreEmulatorTestBase() {
     }
 
     @Test
-    fun unauthenticated_cannotReadUsers() = runBlocking {
+    fun z_unauthenticated_cannotReadUsers() = runBlocking {
         auth.signOut()
         var failed = false
         try {

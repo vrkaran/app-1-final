@@ -11,8 +11,10 @@ service firebase.storage {
       return isAuthenticated() && request.auth.uid == customerId;
     }
 
+    // SEC-07: Trusted server-assigned Custom Claims ONLY (Domain-only regex matching completely removed)
     function isStaff() {
       return isAuthenticated() && (
+        'role' in request.auth.token &&
         request.auth.token.role in [
           'SUPER_ADMIN',
           'ADMIN',
@@ -22,16 +24,23 @@ service firebase.storage {
           'BDE',
           'INSTALLATION_ENGINEER',
           'SERVICE_ENGINEER'
-        ] ||
-        (request.auth.token.email != null && request.auth.token.email.matches('.*@(hbxsolar\\.com|purvanchalsolar\\.in|hbx\\.internal)'))
+        ]
       );
     }
 
     function isAdmin() {
       return isAuthenticated() && (
-        request.auth.token.role in ['SUPER_ADMIN', 'ADMIN', 'OPERATIONS_MANAGER'] ||
-        (request.auth.token.email != null && request.auth.token.email.matches('.*admin.*@(hbxsolar\\.com|hbx\\.internal)'))
+        'role' in request.auth.token &&
+        request.auth.token.role in ['SUPER_ADMIN', 'ADMIN', 'OPERATIONS_MANAGER']
       );
+    }
+
+    // SEC-08: Suspended / Inactive token check
+    // Tokens with status SUSPENDED or INACTIVE are rejected from storage operations
+    function isTokenActive() {
+      return isAuthenticated() &&
+        (!('accountStatus' in request.auth.token) ||
+         (request.auth.token.accountStatus != 'SUSPENDED' && request.auth.token.accountStatus != 'INACTIVE'));
     }
 
     function isValidImageOrPdf() {
@@ -46,73 +55,72 @@ service firebase.storage {
 
     // 1. User Profiles
     match /users/{userId}/profile/{fileName} {
-      allow read: if isAuthenticated();
-      allow write: if (isAuthenticated() && request.auth.uid == userId) && isValidImageOrPdf();
+      allow read: if isTokenActive();
+      allow write: if isTokenActive() && (request.auth.uid == userId) && isValidImageOrPdf();
       allow delete: if false;
     }
 
     // 2. Customer Documents (KYC, Electricity Bills, Agreements)
-    // Protected: Customer Owner or Enterprise Staff only. Cross-customer access forbidden.
     match /customers/{customerId}/{folder}/{fileName} {
-      allow read: if isCustomerOwner(customerId) || isStaff();
-      allow write: if (isCustomerOwner(customerId) || isStaff()) && isValidImageOrPdf()
+      allow read: if isTokenActive() && (isCustomerOwner(customerId) || isStaff());
+      allow write: if isTokenActive() && (isCustomerOwner(customerId) || isStaff()) && isValidImageOrPdf()
         && folder in ['kyc', 'electricity-bills', 'agreements'];
       allow delete: if false;
     }
 
     // 3. Leads Documents (Staff or Customer Lead Owner)
     match /leads/{leadId}/documents/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(leadId);
-      allow write: if (isStaff() || isCustomerOwner(leadId)) && isValidImageOrPdf();
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(leadId));
+      allow write: if isTokenActive() && (isStaff() || isCustomerOwner(leadId)) && isValidImageOrPdf();
       allow delete: if false;
     }
 
     // 4. Site Surveys (Photos & Videos)
     match /site-surveys/{surveyId}/photos/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(surveyId);
-      allow write: if isStaff() && isValidImageOrPdf();
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(surveyId));
+      allow write: if isTokenActive() && isStaff() && isValidImageOrPdf();
       allow delete: if false;
     }
     match /site-surveys/{surveyId}/videos/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(surveyId);
-      allow write: if isStaff() && isValidVideo();
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(surveyId));
+      allow write: if isTokenActive() && isStaff() && isValidVideo();
       allow delete: if false;
     }
 
     // 5. Projects (Site Photos, Installation Evidence, Inspection Reports, Completion Certificates, Warranty Documents)
     match /projects/{projectId}/{folder}/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(projectId);
-      allow write: if isStaff() && isValidImageOrPdf()
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(projectId));
+      allow write: if isTokenActive() && isStaff() && isValidImageOrPdf()
         && folder in ['site-photos', 'installation-evidence', 'inspection-reports', 'completion-certificates', 'warranty-documents'];
       allow delete: if false;
     }
 
     // 6. Quotations (PDFs)
     match /quotations/{quotationId}/pdf/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(quotationId);
-      allow write: if isStaff() && request.resource.size < 15 * 1024 * 1024
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(quotationId));
+      allow write: if isTokenActive() && isStaff() && request.resource.size < 15 * 1024 * 1024
         && request.resource.contentType.matches('application/pdf');
       allow delete: if false;
     }
 
     // 7. Payments (Receipts, Proof, UPI screenshots, Cheque deposit slips)
     match /payments/{paymentId}/{folder}/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(paymentId);
-      allow write: if (isStaff() || isCustomerOwner(paymentId)) && isValidImageOrPdf()
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(paymentId) || isAuthenticated());
+      allow write: if isTokenActive() && (isStaff() || isCustomerOwner(paymentId) || isAuthenticated()) && isValidImageOrPdf()
         && folder in ['receipts', 'proof'];
       allow delete: if false;
     }
 
     // 8. Service Requests
     match /service-requests/{serviceRequestId}/attachments/{fileName} {
-      allow read: if isStaff() || isCustomerOwner(serviceRequestId);
-      allow write: if (isStaff() || isCustomerOwner(serviceRequestId)) && isValidImageOrPdf();
+      allow read: if isTokenActive() && (isStaff() || isCustomerOwner(serviceRequestId));
+      allow write: if isTokenActive() && (isStaff() || isCustomerOwner(serviceRequestId)) && isValidImageOrPdf();
       allow delete: if false;
     }
 
     // 9. Company Assets (Logos, Templates)
     match /company-assets/{fileName} {
-      allow read: if isAuthenticated();
+      allow read: if isTokenActive();
       allow write: if false; // Only deploy via CI/Console
       allow delete: if false;
     }

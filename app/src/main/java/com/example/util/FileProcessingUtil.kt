@@ -138,6 +138,39 @@ object FileProcessingUtil {
         }
     }
 
+    fun calculateSHA256Checksum(file: File): String? {
+        return try {
+            val digest = MessageDigest.getInstance("SHA-256")
+            file.inputStream().use { stream ->
+                val buffer = ByteArray(8192)
+                var bytesRead: Int
+                while (stream.read(buffer).also { bytesRead = it } != -1) {
+                    digest.update(buffer, 0, bytesRead)
+                }
+            }
+            val hashBytes = digest.digest()
+            val sb = StringBuilder()
+            for (b in hashBytes) {
+                sb.append(String.format(Locale.US, "%02x", b))
+            }
+            sb.toString()
+        } catch (e: Exception) {
+            Log.w(TAG, "SHA-256 calculation failed: ${e.message}")
+            null
+        }
+    }
+
+    fun verifyFileIntegrity(file: File, expectedChecksum: String): Boolean {
+        if (!file.exists() || expectedChecksum.isBlank()) return false
+        val cleanExpected = expectedChecksum.trim().lowercase(Locale.US)
+        val actualHash = if (cleanExpected.length == 64) {
+            calculateSHA256Checksum(file)
+        } else {
+            calculateMD5Checksum(file)
+        }
+        return actualHash != null && actualHash.equals(cleanExpected, ignoreCase = true)
+    }
+
     fun getMimeTypeFromExtension(extension: String): String {
         return when (extension.lowercase(Locale.US).removePrefix(".")) {
             "jpg", "jpeg" -> "image/jpeg"
